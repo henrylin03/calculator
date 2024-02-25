@@ -23,10 +23,6 @@ function operate(num1, num2, operator) {
     }
 }
 
-// function displayDigits() {
-//     display.textContent += 
-// }
-
 let num1;
 let num2;
 let operator;
@@ -42,4 +38,8 @@ digitBtns.forEach(btn => {
         () => display.textContent += btn.textContent
     )
 })
-// backspace.addEventListener("click", () => display.textContent = display.textContent)
+
+backspaceBtn.addEventListener("click", () => {
+    const displayedDigits = display.textContent;
+    display.textContent = displayedDigits.slice(0, displayedDigits.length - 1);
+})
