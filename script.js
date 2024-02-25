@@ -1,5 +1,5 @@
-const digitBtns = document.querySelectorAll(".digit");
 const display = document.querySelector(".display");
+const digitBtns = document.querySelectorAll(".digit");
 const backspaceBtn = document.querySelector("#backspace");
 const clearBtn = document.querySelector("#clear");
 
