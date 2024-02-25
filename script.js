@@ -27,19 +27,17 @@ let num1;
 let num2;
 let operator;
 
-
-
-// console.log(operate(1, 1, "w"))
-
-// ADD EVENT LISTENER ON DIGIT BUTTONS SUCH THAT WHEN THEY ARE CLICKED, THEY ARE SHOWN ON DISPLAY. THEN CAN BE REMOVED. IM NOT SURE IF THIS IS THE RIGHT THING VS ADDING EVENT LISTENER ON DISPLAY... NO I DON'T THINK SO. IT SHOULD BE THE BUTTONS.
-
 digitBtns.forEach(btn => {
     btn.addEventListener("click",
         () => display.textContent += btn.textContent
     )
-})
+});
 
 backspaceBtn.addEventListener("click", () => {
     const displayedDigits = display.textContent;
     display.textContent = displayedDigits.slice(0, displayedDigits.length - 1);
-})
+});
+
+clearBtn.addEventListener("click", () => display.textContent = "");
+
+// ! bug: the size of the display changes from nothing to when you type something
