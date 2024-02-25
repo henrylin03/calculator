@@ -12,6 +12,7 @@
 .display {
     font-size: 90px;
     text-align: right;
+    height: 100px;
 }
 
 .buttons-container {
