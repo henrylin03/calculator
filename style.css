@@ -35,10 +35,6 @@ button {
     border: 1px grey solid;
 }
 
-#backspace img {
-    width: 15%;
-}
-
 .final .digit {
     flex: 1;
 }
