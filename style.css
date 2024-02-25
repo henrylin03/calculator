@@ -7,7 +7,12 @@
 .calculator {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
     align-items: center;
 }
 
@@ -17,6 +22,5 @@
 }
 
 .row button {
-    flex: 1;
     padding: 20px;
 }
