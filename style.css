@@ -12,7 +12,7 @@
 .display {
     font-size: 90px;
     text-align: right;
-    height: 100px;
+    min-height: 100px;
 }
 
 .buttons-container {
@@ -39,3 +39,4 @@ button {
 }
 
 /* TODO: MOVE CALCULATOR TOWARDS THE CENTER, VERTICALLY */
+/* TODO: BUTTONS SHOULDN'T SQUISH WHEN SCREEN IS NARROWED */
