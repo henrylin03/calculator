@@ -23,13 +23,21 @@ function operate(num1, num2, operator) {
 }
 
 // function displayDigits() {
-
+//     display.textContent += 
 // }
 
 let num1;
 let num2;
 let operator;
 
+
+
 // console.log(operate(1, 1, "w"))
 
 // ADD EVENT LISTENER ON DIGIT BUTTONS SUCH THAT WHEN THEY ARE CLICKED, THEY ARE SHOWN ON DISPLAY. THEN CAN BE REMOVED. IM NOT SURE IF THIS IS THE RIGHT THING VS ADDING EVENT LISTENER ON DISPLAY... NO I DON'T THINK SO. IT SHOULD BE THE BUTTONS.
+
+digitButtons.forEach(button => {
+    button.addEventListener("click",
+        () => display.textContent += button.textContent
+    )
+})
