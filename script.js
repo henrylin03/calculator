@@ -6,6 +6,8 @@ const backspaceBtn = document.querySelector("#backspace");
 const allClearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
 
+const isNumber = str => /\d/.test(str);
+
 const add = (num1, num2) => num1 + num2;
 const subtract = (num1, num2) => num1 - num2;
 const multiply = (num1, num2) => num1 * num2;
@@ -69,7 +71,6 @@ operatorBtns.forEach(btn => {
 
         num1 = smallDisplay.textContent; //TODO: WHAT IF THE USER WANTS TO DO OPERATIONS ON MULTIPLE NUMBERS?
 
-        const isNumber = str => /\d/.test(str);
         const lastTwoEntries = smallDisplay.textContent.slice(-1);
         if (!isNumber(lastTwoEntries)) {
             console.log("both are operators");
@@ -86,11 +87,15 @@ operatorBtns.forEach(btn => {
     }
 });
 
-
 equalsBtn.addEventListener("click", () => {
-    num2 = display.textContent;
+    const lastEntryIsOperator = !isNumber(smallDisplay.textContent.slice(-1));
+    if (lastEntryIsOperator) return;
+
+    const digitsAfterLastOperator = smallDisplay.textContent.split(/\D+/ig);
+    console.log(digitsAfterLastOperator);
+    // num2 = bigDisplay.textContent;
     const calculationResult = operate(num1, num2, operator);
-    display.textContent = calculationResult;
+    bigDisplay.textContent = calculationResult;
 });
 
 
