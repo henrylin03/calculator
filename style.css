@@ -49,6 +49,13 @@ button {
     background-color: rgba(239, 237, 238, 255);
 }
 
+.exponent {
+    background-image: url("./assets/exponent.png");
+    background-size: 15%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .final .digit {
     flex: 1;
 }
