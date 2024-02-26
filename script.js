@@ -3,13 +3,21 @@ const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const backspaceBtn = document.querySelector("#backspace");
 const clearBtn = document.querySelector("#clear");
+const equalsBtn = document.querySelector("#equals");
 
 const add = (num1, num2) => num1 + num2;
 const subtract = (num1, num2) => num1 - num2;
 const multiply = (num1, num2) => num1 * num2;
 const divide = (num1, num2) => num1 / num2;
 
+let num1;
+let num2;
+let operator;
+
 function operate(num1, num2, operator) {
+    num1 = +num1;
+    num2 = +num2;
+
     switch (operator) {
         case "+":
             return add(num1, num2);
@@ -25,7 +33,7 @@ function operate(num1, num2, operator) {
 digitBtns.forEach(btn => {
     btn.addEventListener("click",
         () => display.textContent += btn.textContent
-    )
+    );
 });
 
 backspaceBtn.addEventListener("click", () => {
@@ -35,28 +43,25 @@ backspaceBtn.addEventListener("click", () => {
 
 clearBtn.addEventListener("click", () => display.textContent = "");
 
-let num1;
-let num2;
-let operator;
-
 operatorBtns.forEach(btn => {
     btn.addEventListener("click", handleClick)
-
     function handleClick(e) {
         if (!display) return;
 
         num1 = display.textContent;
         operator = e.target.textContent;
         const res = [num1, operator]
-        console.log(res);
+        // console.log(res);
         return res;
     }
+});
+
+equalsBtn.addEventListener("click", () => {
+    num2 = display.textContent;
+
 })
 
-// have operators listen for clicks
-// WHEN user clicks any operator (that isn't equals):
-// IF there is no value in display, do nothing
-// IF there is value in display, store the value as num1, and operator as `operator`
-// display does not change.
+operate(1, 1, "+");
 // WHEN user clicks equals WITHOUT having touched any of the other numbers, nothing happens
 // IF user has clicked any of the other digits (incl 0), then return answer
+// ! IT MIGHT SIMPLER TO HAVE A HISTORICAL (SMALLER) TRACKER UNDER. WHEN USER CLICKS OPERATOR, IT LOGS THE OPERATOR AND THE NUMBER THERE, AND THE 'MAIN' DISPLAY CLEARS THE WAY. IF THE MAIN DISPLAY HAS NOT BEEN POPULATED WITH ANY INFORMATION, THEN NOTHING CHANGES.
