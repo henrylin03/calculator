@@ -79,7 +79,9 @@ operatorBtns.forEach(btn => {
             // TODO: WHAT IF A USER WANTS TO USE NEGATIVE NUMBERS??
         }
 
-        const operatorIsPower = () => e.target.querySelectorAll("img");
+        // every other operator, other than the power (exponent) has unicode symbols as strings in the HTML, rather than an image
+        const operatorIsPower = () => e.target.querySelector("img[alt=exponent]");
+        console.log(e.target.querySelector("img[alt=exponent]"));
         operator = operatorIsPower ? "^" : e.target.textContent;
         bigDisplay.textContent = smallDisplay.textContent;
         smallDisplay.textContent += operator;
