@@ -50,18 +50,15 @@ operatorBtns.forEach(btn => {
 
         num1 = display.textContent;
         operator = e.target.textContent;
-        const res = [num1, operator]
-        // console.log(res);
-        return res;
     }
 });
 
 equalsBtn.addEventListener("click", () => {
     num2 = display.textContent;
+    const calculationResult = operate(num1, num2, operator);
+    display.textContent = calculationResult;
+});
 
-})
-
-operate(1, 1, "+");
 // WHEN user clicks equals WITHOUT having touched any of the other numbers, nothing happens
 // IF user has clicked any of the other digits (incl 0), then return answer
 // ! IT MIGHT SIMPLER TO HAVE A HISTORICAL (SMALLER) TRACKER UNDER. WHEN USER CLICKS OPERATOR, IT LOGS THE OPERATOR AND THE NUMBER THERE, AND THE 'MAIN' DISPLAY CLEARS THE WAY. IF THE MAIN DISPLAY HAS NOT BEEN POPULATED WITH ANY INFORMATION, THEN NOTHING CHANGES.
