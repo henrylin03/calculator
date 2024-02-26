@@ -41,7 +41,12 @@ backspaceBtn.addEventListener("click", () => {
     display.textContent = displayedDigits.slice(0, displayedDigits.length - 1);
 });
 
-clearBtn.addEventListener("click", () => display.textContent = "");
+clearBtn.addEventListener("click", () => {
+    num1 = "";
+    operator = "";
+    num2 = "";
+    display.textContent = "";
+});
 
 operatorBtns.forEach(btn => {
     btn.addEventListener("click", handleClick)
