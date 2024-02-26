@@ -1,4 +1,5 @@
-const display = document.querySelector(".display");
+const bigDisplay = document.querySelector(".big-display");
+const smallDisplay = document.querySelector(".small-display");
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const backspaceBtn = document.querySelector("#backspace");
@@ -32,11 +33,46 @@ function operate(num1, num2, operator) {
     }
 }
 
+function removeLastInput() {
+    const displayedInput = smallDisplay.textContent;
+    smallDisplay.textContent = displayedInput.slice(0, displayedInput.length - 1);
+}
+
+// WHAT NEEDS TO HAPPEN::::
+
+// WHEN digit button clicked - APPEND string of digit to small-display (done)
+// THEN WHEN operator button clicked, show digits on big-display AND operator to small-display
+// THEN WHEN another digit clicked, this is added to small-display
+// THEN WHEN "equals" is clicked, then the result is shown on the big-display, and the second number is shown on the small display
+
+// WHEN user clicks "AC" (all clear), everything is removed from memory
+// WHEN user clicks backspace, just what is in the small-display is removed by one character
+
+
 digitBtns.forEach(btn => {
     btn.addEventListener("click",
-        () => display.textContent += btn.textContent
+        () => smallDisplay.textContent += btn.textContent
     );
 });
+
+operatorBtns.forEach(btn => {
+    btn.addEventListener("click", handleClick)
+    function handleClick(e) {
+        if (!smallDisplay) return;
+
+        num1 = smallDisplay.textContent;
+
+        const isNumber = str => /\d/.test(str);
+        if (!isNumber(smallDisplay.textContent.slice(-1))) {
+            console.log("both are operators");
+            removeLastInput();
+        }
+
+        operator = e.target.textContent;
+        smallDisplay.textContent += operator; //TODO: WHAT HAPPENS WHEN THE POWER OF IS CLICKED??
+    }
+});
+
 
 backspaceBtn.addEventListener("click", () => {
     const displayedDigits = display.textContent;
@@ -50,15 +86,7 @@ clearBtn.addEventListener("click", () => {
     display.textContent = "";
 });
 
-operatorBtns.forEach(btn => {
-    btn.addEventListener("click", handleClick)
-    function handleClick(e) {
-        if (!display) return;
-        num1 = display.textContent;
-        operator = e.target.textContent;
-        display.textContent = "";
-    }
-});
+
 
 equalsBtn.addEventListener("click", () => {
     num2 = display.textContent;
