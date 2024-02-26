@@ -42,7 +42,7 @@ button {
     flex: 1;
 }
 
-.equals {
+#equals {
     flex: 3 1 auto;
 }
 

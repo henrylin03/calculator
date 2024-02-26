@@ -23,10 +23,6 @@ function operate(num1, num2, operator) {
     }
 }
 
-let num1;
-let num2;
-let operator;
-
 digitBtns.forEach(btn => {
     btn.addEventListener("click",
         () => display.textContent += btn.textContent
@@ -39,3 +35,7 @@ backspaceBtn.addEventListener("click", () => {
 });
 
 clearBtn.addEventListener("click", () => display.textContent = "");
+
+let num1;
+let num2;
+let operator;
