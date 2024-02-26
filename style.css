@@ -12,22 +12,13 @@
     padding: 2rem 0.5rem;
 }
 
-.big-display {
+.display {
     font-size: 90px;
     text-align: right;
     min-height: 150px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-}
-
-.small-display {
-    text-align: right;
-    min-height: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    color: darkgray;
 }
 
 .buttons-container {

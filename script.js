@@ -1,12 +1,9 @@
-const bigDisplay = document.querySelector(".big-display");
-const smallDisplay = document.querySelector(".small-display");
+const display = document.querySelector(".display");
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const backspaceBtn = document.querySelector("#backspace");
 const allClearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
-
-const isNumber = str => /\d/.test(str);
 
 const add = (num1, num2) => num1 + num2;
 const subtract = (num1, num2) => num1 - num2;
@@ -36,35 +33,33 @@ function operate(num1, num2, operator) {
 }
 
 function removeLastInput() {
-    const displayedInput = smallDisplay.textContent;
-    smallDisplay.textContent = displayedInput.slice(0, displayedInput.length - 1);
+    const displayedInput = display.textContent;
+    display.textContent = displayedInput.slice(0, displayedInput.length - 1);
 }
 
 
-// adding event listeners and handlers
 backspaceBtn.addEventListener("click", removeLastInput);
 allClearBtn.addEventListener("click", () => {
     num1 = null;
     operator = null;
     num2 = null;
-    bigDisplay.textContent = null;
-    smallDisplay.textContent = null;
+    display.textContent = null;
 });
 
 digitBtns.forEach(btn => {
     btn.addEventListener("click",
-        () => smallDisplay.textContent += btn.textContent
+        () => display.textContent += btn.textContent
     );
 });
 
 operatorBtns.forEach(btn => {
     btn.addEventListener("click", handleClick)
     function handleClick(e) {
-        if (!smallDisplay.textContent) return;
+        if (!display.textContent) return;
 
-        num1 = smallDisplay.textContent; //TODO: WHAT IF THE USER WANTS TO DO OPERATIONS ON MULTIPLE NUMBERS?
+        num1 = display.textContent; //TODO: WHAT IF THE USER WANTS TO DO OPERATIONS ON MULTIPLE NUMBERS?
 
-        const lastTwoEntries = smallDisplay.textContent.slice(-1);
+        const lastTwoEntries = display.textContent.slice(-1);
         if (!isNumber(lastTwoEntries)) {
             console.log("both are operators");
             removeLastInput();
@@ -75,20 +70,20 @@ operatorBtns.forEach(btn => {
         const operatorIsPower = () => e.target.classList.contains("exponent");
         operator = operatorIsPower() ? "^" : e.target.textContent;
 
-        bigDisplay.textContent = smallDisplay.textContent;
-        smallDisplay.textContent += operator;
+        display.textContent = display.textContent;
+        display.textContent += operator;
     }
 });
 
 equalsBtn.addEventListener("click", () => {
-    const lastEntryIsOperator = !isNumber(smallDisplay.textContent.slice(-1));
+    const lastEntryIsOperator = !isNumber(display.textContent.slice(-1));
     if (lastEntryIsOperator) return;
 
-    const digitsAfterLastOperator = smallDisplay.textContent.split(/\D+/ig).at(-1);
+    const digitsAfterLastOperator = display.textContent.split(/\D+/ig).at(-1);
     num2 = digitsAfterLastOperator;
 
     const calculationResult = operate(num1, num2, operator);
-    bigDisplay.textContent = calculationResult;
+    display.textContent = calculationResult;
 });
 
 
