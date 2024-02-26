@@ -37,6 +37,7 @@ button {
     border-radius: 1rem;
     border: 1px grey solid;
     font-weight: bolder;
+    background-color: rgba(239, 237, 238, 255);
 }
 
 .final .digit {
@@ -45,6 +46,8 @@ button {
 
 #equals {
     flex: 3 1 auto;
+    background-color: rgba(237, 128, 46, 255);
+    color: rgba(239, 237, 238, 255);
 }
 
 /* TODO: MOVE CALCULATOR TOWARDS THE CENTER, VERTICALLY */

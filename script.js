@@ -54,9 +54,9 @@ operatorBtns.forEach(btn => {
     btn.addEventListener("click", handleClick)
     function handleClick(e) {
         if (!display) return;
-
         num1 = display.textContent;
         operator = e.target.textContent;
+        display.textContent = "";
     }
 });
 
@@ -66,6 +66,9 @@ equalsBtn.addEventListener("click", () => {
     display.textContent = calculationResult;
 });
 
-// WHEN user clicks equals WITHOUT having touched any of the other numbers, nothing happens
-// IF user has clicked any of the other digits (incl 0), then return answer
-// ! IT MIGHT SIMPLER TO HAVE A HISTORICAL (SMALLER) TRACKER UNDER. WHEN USER CLICKS OPERATOR, IT LOGS THE OPERATOR AND THE NUMBER THERE, AND THE 'MAIN' DISPLAY CLEARS THE WAY. IF THE MAIN DISPLAY HAS NOT BEEN POPULATED WITH ANY INFORMATION, THEN NOTHING CHANGES.
+
+//TODO ? NEED TO FIND OUT HOW TO MAKE IT SO THAT AFTER USER CLICKS EQUALS, THE RESULT IS DISPLAYED, BUT AS SOON AS USER PRESSES ANOTHER NUMBER, IT RESTARTS - MAYBE NESTED EVENT LISTENERS? MAYBE ONCE:TRUE ON EVENT LISTENERS?
+
+//TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
+
+// ? IT MIGHT SIMPLER TO HAVE A HISTORICAL (SMALLER) TRACKER UNDER. WHEN USER CLICKS OPERATOR, IT LOGS THE OPERATOR AND THE NUMBER THERE, AND THE 'MAIN' DISPLAY CLEARS THE WAY. IF THE MAIN DISPLAY HAS NOT BEEN POPULATED WITH ANY INFORMATION, THEN NOTHING CHANGES.
