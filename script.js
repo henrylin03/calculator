@@ -27,22 +27,29 @@ function operate(num1, num2, operator) {
         case "÷":
             return divide(num1, num2);
     }
-}
+};
 
 clearBtn.addEventListener("click", () => {
     num1 = null;
     operator = null;
     num2 = null;
-    display.textContent = null;
+    display.textContent = 0;
 });
 
 digitBtns.forEach(btn => {
-    btn.addEventListener("click",
-        () => display.textContent += btn.textContent
-    );
+    btn.addEventListener("click", () => {
+        if (display.textContent == 0) { display.textContent = "" };
+        display.textContent += btn.textContent
+    });
 });
 
+operatorBtns.forEach(btn => {
+    const handleBtnClick = (e) => {
 
+    }
+
+    btn.addEventListener("click", handleBtnClick);
+})
 
 
 // operatorBtns.forEach(btn => {
