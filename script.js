@@ -3,7 +3,7 @@ const smallDisplay = document.querySelector(".small-display");
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const backspaceBtn = document.querySelector("#backspace");
-const clearBtn = document.querySelector("#clear");
+const allClearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
 
 const add = (num1, num2) => num1 + num2;
@@ -39,6 +39,14 @@ function removeLastInput() {
 }
 
 backspaceBtn.addEventListener("click", removeLastInput);
+allClearBtn.addEventListener("click", () => {
+    num1 = "";
+    operator = "";
+    num2 = "";
+    bigDisplay.textContent = "";
+    smallDisplay.textContent = "";
+});
+
 
 // WHAT NEEDS TO HAPPEN::::
 
@@ -71,20 +79,12 @@ operatorBtns.forEach(btn => {
             // TODO: WHAT IF A USER WANTS TO USE NEGATIVE NUMBERS??
         }
 
-        operator = e.target.textContent;
-        smallDisplay.textContent += operator; //TODO: WHAT HAPPENS WHEN THE POWER OF IS CLICKED??
+        const operatorIsPower = () => e.target.querySelectorAll("img");
+        operator = operatorIsPower ? "^" : e.target.textContent;
+        bigDisplay.textContent = smallDisplay.textContent;
+        smallDisplay.textContent += operator;
     }
 });
-
-
-
-clearBtn.addEventListener("click", () => {
-    num1 = "";
-    operator = "";
-    num2 = "";
-    display.textContent = "";
-});
-
 
 
 equalsBtn.addEventListener("click", () => {
