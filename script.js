@@ -91,7 +91,7 @@ equalsBtn.addEventListener("click", () => {
     const lastEntryIsOperator = !isNumber(smallDisplay.textContent.slice(-1));
     if (lastEntryIsOperator) return;
 
-    const digitsAfterLastOperator = smallDisplay.textContent.split(/\D+/ig);
+    const digitsAfterLastOperator = smallDisplay.textContent.split(/\D+/ig).at(-1);
     console.log(digitsAfterLastOperator);
     // num2 = bigDisplay.textContent;
     const calculationResult = operate(num1, num2, operator);
