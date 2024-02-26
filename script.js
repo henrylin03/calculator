@@ -9,6 +9,7 @@ const add = (num1, num2) => num1 + num2;
 const subtract = (num1, num2) => num1 - num2;
 const multiply = (num1, num2) => num1 * num2;
 const divide = (num1, num2) => num1 / num2;
+const powerOf = (num1, num2) => num1 ** num2;
 
 let num1;
 let num2;
@@ -17,7 +18,6 @@ let operator;
 function operate(num1, num2, operator) {
     num1 = +num1;
     num2 = +num2;
-
     switch (operator) {
         case "+":
             return add(num1, num2);
@@ -27,6 +27,8 @@ function operate(num1, num2, operator) {
             return multiply(num1, num2);
         case "÷":
             return divide(num1, num2);
+        default:
+            return powerOf(num1, num2);
     }
 }
 
