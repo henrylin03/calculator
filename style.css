@@ -21,7 +21,7 @@
     align-items: center;
 }
 
-.full-calculation-display {
+.small-display {
     text-align: right;
     min-height: 50px;
     display: flex;
