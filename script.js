@@ -38,6 +38,8 @@ function removeLastInput() {
     smallDisplay.textContent = displayedInput.slice(0, displayedInput.length - 1);
 }
 
+backspaceBtn.addEventListener("click", removeLastInput);
+
 // WHAT NEEDS TO HAPPEN::::
 
 // WHEN digit button clicked - APPEND string of digit to small-display (done)
@@ -60,12 +62,13 @@ operatorBtns.forEach(btn => {
     function handleClick(e) {
         if (!smallDisplay) return;
 
-        num1 = smallDisplay.textContent;
+        num1 = smallDisplay.textContent; //TODO: WHAT IF THE USER WANTS TO DO OPERATIONS ON MULTIPLE NUMBERS?
 
         const isNumber = str => /\d/.test(str);
         if (!isNumber(smallDisplay.textContent.slice(-1))) {
             console.log("both are operators");
             removeLastInput();
+            // TODO: WHAT IF A USER WANTS TO USE NEGATIVE NUMBERS??
         }
 
         operator = e.target.textContent;
@@ -74,10 +77,6 @@ operatorBtns.forEach(btn => {
 });
 
 
-backspaceBtn.addEventListener("click", () => {
-    const displayedDigits = display.textContent;
-    display.textContent = displayedDigits.slice(0, displayedDigits.length - 1);
-});
 
 clearBtn.addEventListener("click", () => {
     num1 = "";
