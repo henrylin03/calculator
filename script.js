@@ -4,8 +4,7 @@ const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
 
-let num1;
-let num2;
+let nums = [];
 let operator;
 
 function operate(num1, num2, operator) {
@@ -36,44 +35,27 @@ clearBtn.addEventListener("click", () => {
     display.textContent = 0;
 });
 
-digitBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-        if (display.textContent == 0) { display.textContent = "" };
-        display.textContent += btn.textContent
-    });
-});
+function displayDigit(e) {
+    if (display.textContent == 0) { display.textContent = "" };
+    display.textContent += e.target.textContent
+};
+digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
 operatorBtns.forEach(btn => {
-    const handleBtnClick = (e) => {
+    const handleClick = () => {
+        num1 = display.textContent;
+        operator = btn.textContent;
+        console.log(num1, operator)
 
-    }
-
-    btn.addEventListener("click", handleBtnClick);
+        digitBtns.forEach(btn => {
+            btn.removeEventListener("click", displayDigit);
+            btn.addEventListener("click", () => {
+                display.textContent = btn.textContent;
+            });
+        })
+    };
+    btn.addEventListener("click", handleClick);
 })
-
-
-// operatorBtns.forEach(btn => {
-//     btn.addEventListener("click", handleClick)
-//     function handleClick(e) {
-//         if (!display.textContent) return;
-
-//         num1 = display.textContent; //TODO: WHAT IF THE USER WANTS TO DO OPERATIONS ON MULTIPLE NUMBERS?
-
-//         const lastTwoEntries = display.textContent.slice(-1);
-//         if (!isNumber(lastTwoEntries)) {
-//             console.log("both are operators");
-//             removeLastInput();
-//             // TODO: WHAT IF A USER WANTS TO USE NEGATIVE NUMBERS??
-//         }
-
-//         // every operator, other than the power (exponent) has unicode as strings in the HTML, rather than image, on the buttons
-//         const operatorIsPower = () => e.target.classList.contains("exponent");
-//         operator = operatorIsPower() ? "^" : e.target.textContent;
-
-//         display.textContent = display.textContent;
-//         display.textContent += operator;
-//     }
-// });
 
 // equalsBtn.addEventListener("click", () => {
 //     const lastEntryIsOperator = !isNumber(display.textContent.slice(-1));
