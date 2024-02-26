@@ -40,19 +40,12 @@ button {
     background-color: rgba(239, 237, 238, 255);
 }
 
-.exponent {
-    background-image: url("./assets/exponent.png");
-    background-size: 15%;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.final .digit {
+.final {
     flex: 1;
 }
 
 #equals {
-    flex: 3 1 auto;
+    flex: 2;
     background-color: rgba(237, 128, 46, 255);
     color: rgba(239, 237, 238, 255);
 }
