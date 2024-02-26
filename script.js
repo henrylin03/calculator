@@ -39,5 +39,3 @@ backspaceBtn.addEventListener("click", () => {
 });
 
 clearBtn.addEventListener("click", () => display.textContent = "");
-
-// ! bug: the size of the display changes from nothing to when you type something

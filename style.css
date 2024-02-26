@@ -15,7 +15,10 @@
 .display {
     font-size: 90px;
     text-align: right;
-    min-height: 100px;
+    min-height: 150px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .buttons-container {
