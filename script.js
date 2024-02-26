@@ -40,11 +40,11 @@ function removeLastInput() {
 
 backspaceBtn.addEventListener("click", removeLastInput);
 allClearBtn.addEventListener("click", () => {
-    num1 = "";
-    operator = "";
-    num2 = "";
-    bigDisplay.textContent = "";
-    smallDisplay.textContent = "";
+    num1 = null;
+    operator = null;
+    num2 = null;
+    bigDisplay.textContent = null;
+    smallDisplay.textContent = null;
 });
 
 
@@ -54,9 +54,6 @@ allClearBtn.addEventListener("click", () => {
 // THEN WHEN operator button clicked, show digits on big-display AND operator to small-display
 // THEN WHEN another digit clicked, this is added to small-display
 // THEN WHEN "equals" is clicked, then the result is shown on the big-display, and the second number is shown on the small display
-
-// WHEN user clicks "AC" (all clear), everything is removed from memory
-// WHEN user clicks backspace, just what is in the small-display is removed by one character
 
 
 digitBtns.forEach(btn => {
@@ -68,21 +65,22 @@ digitBtns.forEach(btn => {
 operatorBtns.forEach(btn => {
     btn.addEventListener("click", handleClick)
     function handleClick(e) {
-        if (!smallDisplay) return;
+        if (!smallDisplay.textContent) return;
 
         num1 = smallDisplay.textContent; //TODO: WHAT IF THE USER WANTS TO DO OPERATIONS ON MULTIPLE NUMBERS?
 
         const isNumber = str => /\d/.test(str);
-        if (!isNumber(smallDisplay.textContent.slice(-1))) {
+        const lastTwoEntries = smallDisplay.textContent.slice(-1);
+        if (!isNumber(lastTwoEntries)) {
             console.log("both are operators");
             removeLastInput();
             // TODO: WHAT IF A USER WANTS TO USE NEGATIVE NUMBERS??
         }
 
-        // every other operator, other than the power (exponent) has unicode symbols as strings in the HTML, rather than an image
-        const operatorIsPower = () => e.target.querySelector("img[alt=exponent]");
-        console.log(e.target.querySelector("img[alt=exponent]"));
-        operator = operatorIsPower ? "^" : e.target.textContent;
+        // every operator, other than the power (exponent) has unicode as strings in the HTML, rather than image, on the buttons
+        const operatorIsPower = () => e.target.classList.contains("exponent");
+        operator = operatorIsPower() ? "^" : e.target.textContent;
+
         bigDisplay.textContent = smallDisplay.textContent;
         smallDisplay.textContent += operator;
     }
@@ -100,6 +98,6 @@ equalsBtn.addEventListener("click", () => {
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
 
-// ? IT MIGHT SIMPLER TO HAVE A HISTORICAL (SMALLER) TRACKER UNDER. WHEN USER CLICKS OPERATOR, IT LOGS THE OPERATOR AND THE NUMBER THERE, AND THE 'MAIN' DISPLAY CLEARS THE WAY. IF THE MAIN DISPLAY HAS NOT BEEN POPULATED WITH ANY INFORMATION, THEN NOTHING CHANGES.
-
 // ! BUG: WHEN THERE IS NOTHING, AND YOU CLICK EQUALS, IT WILL SHOW 1, THEN CLICK AGAIN 0, THEN NAN, THEN REPEAT
+
+// !BUG: WHEN YOU CLICK EXPONENT BUTTON IMG, NOTHING SHOWS UP
