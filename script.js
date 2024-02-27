@@ -40,9 +40,7 @@ function displayDigit(e) {
     if (display.value === "0" || displayNeedsClearing) {
         display.value = "";
         displayNeedsClearing = false;
-    } else if (display.value.length > 6) {
-        return;
-    }
+    } else if (display.value.length > 6) return;
     display.value += e.target.textContent;
 };
 
@@ -68,7 +66,8 @@ function handleOperationBtnClick(e) {
     } else {
         num2 = display.value;
         calculationResult = operate(num1, num2, operator);
-        display.value = calculationResult;
+        display.value = calculationResult.toString().length > 6 ?
+            calculationResult.toFixed(5) : calculationResult;
         num1 = calculationResult;
     };
 
@@ -82,7 +81,10 @@ function handleEqualBtnClick() {
     if (num1 === null || !secondNumberInputted) return;
     num2 = display.value;
     calculationResult = operate(num1, num2, operator);
-    display.value = calculationResult;
+    console.log(calculationResult);
+    console.log(calculationResult.toString().length);
+    display.value = calculationResult.toString().length > 6 ?
+        calculationResult.toFixed(5) : calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
 
