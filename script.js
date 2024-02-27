@@ -3,6 +3,7 @@ const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
+const negativeBtn = document.querySelector(".toggle-negative");
 
 let num1;
 let num2;
@@ -29,7 +30,7 @@ function operate(num1, num2, operator) {
             return multiply(num1, num2);
         case "÷":
             return divide(num1, num2);
-    }
+    };
 };
 
 clearBtn.addEventListener("click", () => location.reload());
@@ -42,6 +43,8 @@ function displayDigit(e) {
     display.textContent += e.target.textContent;
 };
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
+
+negativeBtn.addEventListener("click", () => display.textContent = display.textContent * -1);
 
 function handleOperationBtnClick(e) {
     if (!secondNumberInputted) {
@@ -79,3 +82,5 @@ function handleEqualBtnClick() {
 equalsBtn.addEventListener("click", handleEqualBtnClick)
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
+
+//TODO: PLUS/MINUS BUTTON, PERCENTAGE BUTTON, DECIMALS CALCULATIONS, round numbers (not sure how many dp), error for dividing by zero
