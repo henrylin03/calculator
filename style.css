@@ -5,17 +5,17 @@
 }
 
 .calculator {
-    max-width: 30rem;
-    margin: 100px auto;
+    max-width: 25rem;
+    margin: 3rem auto 0 auto;
     border-radius: 2rem;
-    padding: 2rem 0.5rem;
+    padding: 2rem 1rem;
     background-color: #243441;
 }
 
 .display {
     font-size: 80px;
     text-align: right;
-    min-height: 150px;
+    min-height: 200px;
     max-width: 100%;
     border: none;
     background-color: #243441;
@@ -27,12 +27,15 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 5px;
 }
 
 .row {
     display: flex;
-    gap: 5px;
+}
+
+.buttons-container,
+.row {
+    gap: 10px;
 }
 
 .final {
