@@ -8,7 +8,6 @@ let num1;
 let num2;
 let operator;
 let displayNeedsClearing = false;
-let firstNumIsReady = false;
 
 function operate(num1, num2, operator) {
     num1 = +num1;
@@ -47,25 +46,40 @@ function displayDigit(e) {
 };
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
+let nextOperator;
 function handleOperationBtnClick(e) {
-    // numbers on display are locked down, ready for calculations, unless cleared
+    currentOperator = nextOperator || e.target.textContent;
+    if (!num1) num1 = display.textContent;
+
+    console.log("current operator:", currentOperator);
+    console.log("num1:", num1)
+
+
     displayNeedsClearing = true;
 
-    if (!firstNumIsReady) {
-        num1 = display.textContent;
-        firstNumIsReady = true;
-        operator = e.target.textContent;
-    } else {
-        num2 = display.textContent;
-        console.log("first number is ready");
-        const calculationResult = operate(num1, num2, operator);
-        display.textContent = calculationResult;
 
-        // for any subsequent calculations
-        num1 = calculationResult;
-        operator = e.target.textContent;
-    };
+
+    // // numbers on display are locked down, ready for calculations, unless cleared
+    // displayNeedsClearing = true;
+
+    // if (!firstNumIsReady) {
+    //     num1 = display.textContent;
+    //     firstNumIsReady = true;
+    //     operator = e.target.textContent;
+    //     return;
+    // };
+
+    // num2 = display.textContent;
+    // console.log("first number is ready");
+    // const calculationResult = operate(num1, num2, operator);
+    // display.textContent = calculationResult;
+
+    // // for any subsequent calculations
+    // // num1 = calculationResult;
+    // // operator = e.target.textContent;
 };
+
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick))
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
+//!Bug: when users click one operator, and then want to change that to another one (eg clicked +, and then wants to actually multiply whatever number comes next - )
