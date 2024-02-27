@@ -37,11 +37,24 @@ function operate(num1, num2, operator) {
 };
 
 function displayDigit(e) {
-    if (display.textContent == 0 || displayNeedsClearing) {
+    if (display.textContent === "0" || displayNeedsClearing) {
         display.textContent = "";
         displayNeedsClearing = false;
     }
     display.textContent += e.target.textContent;
+};
+
+function addDecimal() {
+    const currentNum = display.textContent;
+    const currentNumHasDecimalAlready = currentNum.includes(".");
+
+    if (currentNum == 0 || !currentNumHasDecimalAlready) {
+        display.textContent = `${currentNum}.`;
+        displayNeedsClearing = false;
+        return;
+    };
+    if (displayNeedsClearing) return decimalBtn.disabled = true;
+    if (currentNum.slice(-1) == ".") return display.textContent = currentNum.slice(0, -1);
 };
 
 function handleOperationBtnClick(e) {
@@ -75,18 +88,6 @@ function handleEqualBtnClick() {
     secondNumberInputted = false;
 
     num1 = calculationResult;
-};
-
-function addDecimal() {
-    if (displayNeedsClearing) return;
-
-    const currentNum = display.textContent;
-    if (currentNum.slice(-1) != ".") {
-        const numDecimalAdded = `${currentNum}.`;
-        display.textContent = numDecimalAdded;
-    } else {
-        display.textContent = currentNum.slice(0, -1);
-    };
 };
 
 clearBtn.addEventListener("click", () => location.reload());
