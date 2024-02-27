@@ -40,6 +40,8 @@ function displayDigit(e) {
     if (display.value === "0" || displayNeedsClearing) {
         display.value = "";
         displayNeedsClearing = false;
+    } else if (display.value.length > 6) {
+        return;
     }
     display.value += e.target.textContent;
 };
@@ -58,18 +60,15 @@ function addDecimal() {
 };
 
 function handleOperationBtnClick(e) {
+    console.log("secondNumberInputted boolean:", secondNumberInputted);
     if (!secondNumberInputted) {
         num1 = display.value;
         digitBtns.forEach(
-            btn => btn.addEventListener("click",
-                () => secondNumberInputted = true,
-                { once: true }));
+            btn => btn.addEventListener("click", () => secondNumberInputted = true, { once: true }));
     } else {
         num2 = display.value;
         calculationResult = operate(num1, num2, operator);
         display.value = calculationResult;
-        displayNeedsClearing = true;
-
         num1 = calculationResult;
     };
 
@@ -111,3 +110,4 @@ equalsBtn.addEventListener("click", handleEqualBtnClick);
 
 
 //TODO: round numbers (not sure how many dp), error for dividing by zero
+//!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
