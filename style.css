@@ -50,8 +50,8 @@ button {
 
 #equals {
     flex: 2;
-    background-color: rgba(237, 128, 46, 255);
-    color: rgba(239, 237, 238, 255);
+    background-color: #ED802E;
+    color: #fff;
 }
 
 /* TODO: MOVE CALCULATOR TOWARDS THE CENTER, VERTICALLY */
