@@ -52,7 +52,7 @@ button {
     background-color: rgba(239, 237, 238, 255);
 }
 
-#equals {
+.equals {
     flex: 2;
     background-color: #ED802E;
     color: #fff;
