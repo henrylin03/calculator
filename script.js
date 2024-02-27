@@ -58,7 +58,6 @@ function addDecimal() {
 };
 
 function handleOperationBtnClick(e) {
-    console.log("secondNumberInputted boolean:", secondNumberInputted);
     if (!secondNumberInputted) {
         num1 = display.value;
         digitBtns.forEach(
