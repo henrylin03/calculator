@@ -23,7 +23,6 @@ function operate(num1, num2, operator) {
     const subtract = (num1, num2) => num1 - num2;
     const multiply = (num1, num2) => num1 * num2;
     const divide = (num1, num2) => {
-        console.log("num1", num1, "num2", num2);
         if (num2 == "0") return "😵😵😵";
         return num1 / num2;
     };
