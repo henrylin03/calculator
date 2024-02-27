@@ -7,7 +7,7 @@ const equalsBtn = document.querySelector("#equals");
 let num1;
 let num2;
 let operator;
-let calculationResult;
+let calculationResult = null;
 let displayNeedsClearing = false;
 let secondNumberInputted = false;
 
@@ -38,6 +38,7 @@ clearBtn.addEventListener("click", () => {
     num2 = null;
     display.textContent = 0;
     secondNumberInputted = false;
+    calculationResult = null;
 });
 
 function displayDigit(e) {
@@ -49,10 +50,6 @@ function displayDigit(e) {
 };
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
-function displayResult() {
-    if (calculationResult === undefined) return;
-};
-
 function handleOperationBtnClick(e) {
     console.log("second number inputted?", secondNumberInputted)
     if (!secondNumberInputted) {
@@ -61,6 +58,7 @@ function handleOperationBtnClick(e) {
         num2 = display.textContent;
         calculationResult = operate(num1, num2, operator);
         display.textContent = calculationResult;
+        displayNeedsClearing = true;
 
         // prep for chain calculations
         num1 = calculationResult;
@@ -81,9 +79,17 @@ function handleOperationBtnClick(e) {
 };
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 
-equalsBtn.addEventListener("click", displayResult)
+function handleEqualBtnClick() {
+    if (!num1) return;
+    num2 = display.textContent;
+    calculationResult = operate(num1, num2, operator);
+    display.textContent = calculationResult;
+    displayNeedsClearing = true;
 
-console.log(calculationResult)
+    // prep for chain calculations
+    num1 = calculationResult;
+    secondNumberInputted = false;
+};
+equalsBtn.addEventListener("click", handleEqualBtnClick)
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
-//!Bug: when users click one operator, and then want to change that to another one (eg clicked +, and then wants to actually multiply whatever number comes next - )
