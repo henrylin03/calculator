@@ -35,6 +35,11 @@
     gap: 5px;
 }
 
+.final {
+    flex: 1;
+}
+
+/* buttons */
 button {
     height: 70px;
     flex: 1 1 0;
@@ -42,10 +47,6 @@ button {
     border: none;
     font-weight: bolder;
     background-color: rgba(239, 237, 238, 255);
-}
-
-.final {
-    flex: 1;
 }
 
 #equals {
