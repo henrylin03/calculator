@@ -7,6 +7,8 @@ const equalsBtn = document.querySelector("#equals");
 let num1;
 let num2;
 let operator;
+let displayNeedsClearing = false;
+let firstNumIsReady = false;
 
 function operate(num1, num2, operator) {
     num1 = +num1;
@@ -45,32 +47,25 @@ function displayDigit(e) {
 };
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
-let displayNeedsClearing = false;
-let firstNumIsReady = false;
 function handleOperationBtnClick(e) {
     // numbers on display are locked down, ready for calculations, unless cleared
     displayNeedsClearing = true;
 
-    operator = e.target.textContent;
-
     if (!firstNumIsReady) {
         num1 = display.textContent;
         firstNumIsReady = true;
-        console.log("first number is not ready yet...")
-        console.log(num1, operator, num2)
+        operator = e.target.textContent;
     } else {
         num2 = display.textContent;
         console.log("first number is ready");
-
         const calculationResult = operate(num1, num2, operator);
         display.textContent = calculationResult;
+
+        // for any subsequent calculations
         num1 = calculationResult;
+        operator = e.target.textContent;
     };
 };
-
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick))
-
-
-//TODO ? NEED TO FIND OUT HOW TO MAKE IT SO THAT AFTER USER CLICKS EQUALS, THE RESULT IS DISPLAYED, BUT AS SOON AS USER PRESSES ANOTHER NUMBER, IT RESTARTS - MAYBE NESTED EVENT LISTENERS? MAYBE ONCE:TRUE ON EVENT LISTENERS?
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
