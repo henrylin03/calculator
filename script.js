@@ -32,14 +32,7 @@ function operate(num1, num2, operator) {
     }
 };
 
-clearBtn.addEventListener("click", () => {
-    num1 = null;
-    operator = null;
-    num2 = null;
-    display.textContent = 0;
-    secondNumberInputted = false;
-    calculationResult = null;
-});
+clearBtn.addEventListener("click", () => location.reload());
 
 function displayDigit(e) {
     if (display.textContent == 0 || displayNeedsClearing) {
@@ -54,7 +47,11 @@ function handleOperationBtnClick(e) {
     console.log("second number inputted?", secondNumberInputted)
     if (!secondNumberInputted) {
         num1 = display.textContent;
-    } else if (secondNumberInputted) {
+        digitBtns.forEach(
+            btn => btn.addEventListener("click",
+                () => secondNumberInputted = true,
+                { once: true }));
+    } else {
         num2 = display.textContent;
         calculationResult = operate(num1, num2, operator);
         display.textContent = calculationResult;
@@ -62,33 +59,27 @@ function handleOperationBtnClick(e) {
 
         // prep for chain calculations
         num1 = calculationResult;
-        secondNumberInputted = false;
     };
-
-    digitBtns.forEach(
-        btn => btn.addEventListener("click",
-            () => secondNumberInputted = true,
-            { once: true }));
 
     operator = e.target.textContent;
     console.log("current operator:", operator);
     console.log("num1:", num1)
     console.log("num2:", num2);
 
+    secondNumberInputted = false;
     displayNeedsClearing = true;
 };
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 
 function handleEqualBtnClick() {
-    if (!num1 || !secondNumberInputted) return;
+    if (num1 === null || !secondNumberInputted) return;
     num2 = display.textContent;
     calculationResult = operate(num1, num2, operator);
     display.textContent = calculationResult;
     displayNeedsClearing = true;
-
-    // prep for chain calculations
-    num1 = calculationResult;
     secondNumberInputted = false;
+
+    num1 = calculationResult;
 };
 equalsBtn.addEventListener("click", handleEqualBtnClick)
 
