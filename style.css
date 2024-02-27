@@ -5,7 +5,7 @@
 }
 
 .calculator {
-    width: 25vw;
+    max-width: 30rem;
     margin: 100px auto;
     border: 1px black solid;
     border-radius: 2rem;
