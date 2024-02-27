@@ -35,6 +35,7 @@ clearBtn.addEventListener("click", () => {
     operator = null;
     num2 = null;
     display.textContent = 0;
+    secondNumberInputted = false;
 });
 
 function displayDigit(e) {
@@ -47,13 +48,25 @@ function displayDigit(e) {
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
 let nextOperator;
+let secondNumberInputted = false;
 function handleOperationBtnClick(e) {
     currentOperator = nextOperator || e.target.textContent;
-    if (!num1) num1 = display.textContent;
+    console.log("second number inputted?", secondNumberInputted)
+    if (!secondNumberInputted) {
+        num1 = display.textContent;
+    } else if (secondNumberInputted) {
+        num2 = display.textContent;
+    };
+
+    digitBtns.forEach(
+        btn => btn.addEventListener("click",
+            () => secondNumberInputted = true,
+            { once: true }));
+
 
     console.log("current operator:", currentOperator);
     console.log("num1:", num1)
-
+    console.log("num2:", num2);
 
     displayNeedsClearing = true;
 
