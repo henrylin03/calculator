@@ -4,6 +4,7 @@ const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
 const negativeBtn = document.querySelector(".toggle-negative");
+const percentBtn = document.querySelector(".percent");
 
 let num1;
 let num2;
@@ -45,6 +46,17 @@ function displayDigit(e) {
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
 negativeBtn.addEventListener("click", () => display.textContent = display.textContent * -1);
+
+let isPercent = false;
+percentBtn.addEventListener("click", () => {
+    if (isPercent) {
+        display.textContent = display.textContent * 100;
+        isPercent = false;
+        return;
+    }
+    display.textContent = display.textContent / 100;
+    isPercent = true;
+});
 
 function handleOperationBtnClick(e) {
     if (!secondNumberInputted) {
