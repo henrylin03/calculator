@@ -52,6 +52,13 @@ button {
     background-color: rgba(239, 237, 238, 255);
 }
 
+.clear,
+.toggle-negative,
+.percent,
+.operator {
+    color: #ED802E;
+}
+
 .equals {
     flex: 2;
     background-color: #ED802E;
