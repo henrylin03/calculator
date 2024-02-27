@@ -47,15 +47,20 @@ function displayDigit(e) {
 };
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
-let nextOperator;
+
 let secondNumberInputted = false;
 function handleOperationBtnClick(e) {
-    currentOperator = nextOperator || e.target.textContent;
     console.log("second number inputted?", secondNumberInputted)
     if (!secondNumberInputted) {
         num1 = display.textContent;
     } else if (secondNumberInputted) {
         num2 = display.textContent;
+        const calculationResult = operate(num1, num2, operator);
+        display.textContent = calculationResult;
+
+        // prep for chain calculations
+        num1 = calculationResult;
+        secondNumberInputted = false;
     };
 
     digitBtns.forEach(
@@ -63,8 +68,8 @@ function handleOperationBtnClick(e) {
             () => secondNumberInputted = true,
             { once: true }));
 
-
-    console.log("current operator:", currentOperator);
+    operator = e.target.textContent;
+    console.log("current operator:", operator);
     console.log("num1:", num1)
     console.log("num2:", num2);
 
