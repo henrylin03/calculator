@@ -95,10 +95,10 @@ percentBtn.addEventListener("click", () => {
     if (isPercent) {
         display.value = display.value * 100;
         isPercent = false;
-        return;
-    }
-    display.value = display.value / 100;
-    isPercent = true;
+    } else {
+        display.value = display.value / 100;
+        isPercent = true;
+    };
 });
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 decimalBtn.addEventListener("click", addDecimal);
