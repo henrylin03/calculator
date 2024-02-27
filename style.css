@@ -18,6 +18,8 @@
     min-height: 150px;
     max-width: 100%;
     border: none;
+    background-color: #243441;
+    color: #fff
 }
 
 .buttons-container {
