@@ -5,6 +5,7 @@ const clearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
 const negativeBtn = document.querySelector(".toggle-negative");
 const percentBtn = document.querySelector(".percent");
+const decimalBtn = document.querySelector(".decimal");
 
 let num1;
 let num2;
@@ -12,6 +13,7 @@ let operator;
 let calculationResult = null;
 let displayNeedsClearing = false;
 let secondNumberInputted = false;
+let isPercent = false;
 
 function operate(num1, num2, operator) {
     num1 = +num1;
@@ -34,8 +36,6 @@ function operate(num1, num2, operator) {
     };
 };
 
-clearBtn.addEventListener("click", () => location.reload());
-
 function displayDigit(e) {
     if (display.textContent == 0 || displayNeedsClearing) {
         display.textContent = "";
@@ -43,20 +43,6 @@ function displayDigit(e) {
     }
     display.textContent += e.target.textContent;
 };
-digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
-
-negativeBtn.addEventListener("click", () => display.textContent = display.textContent * -1);
-
-let isPercent = false;
-percentBtn.addEventListener("click", () => {
-    if (isPercent) {
-        display.textContent = display.textContent * 100;
-        isPercent = false;
-        return;
-    }
-    display.textContent = display.textContent / 100;
-    isPercent = true;
-});
 
 function handleOperationBtnClick(e) {
     if (!secondNumberInputted) {
@@ -79,7 +65,6 @@ function handleOperationBtnClick(e) {
     secondNumberInputted = false;
     displayNeedsClearing = true;
 };
-operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 
 function handleEqualBtnClick() {
     if (num1 === null || !secondNumberInputted) return;
@@ -91,8 +76,35 @@ function handleEqualBtnClick() {
 
     num1 = calculationResult;
 };
-equalsBtn.addEventListener("click", handleEqualBtnClick)
+
+function addDecimal() {
+    if (displayNeedsClearing) return;
+
+    const currentNum = display.textContent;
+    if (currentNum.slice(-1) != ".") {
+        const numDecimalAdded = `${currentNum}.`;
+        display.textContent = numDecimalAdded;
+    } else {
+        display.textContent = currentNum.slice(0, -1);
+    };
+};
+
+clearBtn.addEventListener("click", () => location.reload());
+digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
+negativeBtn.addEventListener("click", () => display.textContent = display.textContent * -1);
+percentBtn.addEventListener("click", () => {
+    if (isPercent) {
+        display.textContent = display.textContent * 100;
+        isPercent = false;
+        return;
+    }
+    display.textContent = display.textContent / 100;
+    isPercent = true;
+});
+operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
+decimalBtn.addEventListener("click", addDecimal);
+equalsBtn.addEventListener("click", handleEqualBtnClick);
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
 
-//TODO: PLUS/MINUS BUTTON, PERCENTAGE BUTTON, DECIMALS CALCULATIONS, round numbers (not sure how many dp), error for dividing by zero
+//TODO: DECIMALS CALCULATIONS, round numbers (not sure how many dp), error for dividing by zero
