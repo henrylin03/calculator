@@ -37,37 +37,37 @@ function operate(num1, num2, operator) {
 };
 
 function displayDigit(e) {
-    if (display.textContent === "0" || displayNeedsClearing) {
-        display.textContent = "";
+    if (display.value === "0" || displayNeedsClearing) {
+        display.value = "";
         displayNeedsClearing = false;
     }
-    display.textContent += e.target.textContent;
+    display.value += e.target.textContent;
 };
 
 function addDecimal() {
-    const currentNum = display.textContent;
+    const currentNum = display.value;
     const currentNumHasDecimalAlready = currentNum.includes(".");
 
     if (currentNum == 0 || !currentNumHasDecimalAlready) {
-        display.textContent = `${currentNum}.`;
+        display.value = `${currentNum}.`;
         displayNeedsClearing = false;
         return;
     };
     if (displayNeedsClearing) return decimalBtn.disabled = true;
-    if (currentNum.slice(-1) == ".") return display.textContent = currentNum.slice(0, -1);
+    if (currentNum.slice(-1) == ".") return display.value = currentNum.slice(0, -1);
 };
 
 function handleOperationBtnClick(e) {
     if (!secondNumberInputted) {
-        num1 = display.textContent;
+        num1 = display.value;
         digitBtns.forEach(
             btn => btn.addEventListener("click",
                 () => secondNumberInputted = true,
                 { once: true }));
     } else {
-        num2 = display.textContent;
+        num2 = display.value;
         calculationResult = operate(num1, num2, operator);
-        display.textContent = calculationResult;
+        display.value = calculationResult;
         displayNeedsClearing = true;
 
         num1 = calculationResult;
@@ -81,9 +81,9 @@ function handleOperationBtnClick(e) {
 
 function handleEqualBtnClick() {
     if (num1 === null || !secondNumberInputted) return;
-    num2 = display.textContent;
+    num2 = display.value;
     calculationResult = operate(num1, num2, operator);
-    display.textContent = calculationResult;
+    display.value = calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
 
@@ -92,14 +92,14 @@ function handleEqualBtnClick() {
 
 clearBtn.addEventListener("click", () => location.reload());
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
-negativeBtn.addEventListener("click", () => display.textContent = display.textContent * -1);
+negativeBtn.addEventListener("click", () => display.value = display.value * -1);
 percentBtn.addEventListener("click", () => {
     if (isPercent) {
-        display.textContent = display.textContent * 100;
+        display.value = display.value * 100;
         isPercent = false;
         return;
     }
-    display.textContent = display.textContent / 100;
+    display.value = display.value / 100;
     isPercent = true;
 });
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
@@ -108,4 +108,6 @@ equalsBtn.addEventListener("click", handleEqualBtnClick);
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
 
-//TODO: DECIMALS CALCULATIONS, round numbers (not sure how many dp), error for dividing by zero
+
+
+//TODO: round numbers (not sure how many dp), error for dividing by zero
