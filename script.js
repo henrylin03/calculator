@@ -4,7 +4,8 @@ const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
 
-let nums = [];
+let num1;
+let num2;
 let operator;
 
 function operate(num1, num2, operator) {
@@ -19,7 +20,7 @@ function operate(num1, num2, operator) {
     switch (operator) {
         case "+":
             return add(num1, num2);
-        case "-":
+        case "−":
             return subtract(num1, num2);
         case "×":
             return multiply(num1, num2);
@@ -36,37 +37,38 @@ clearBtn.addEventListener("click", () => {
 });
 
 function displayDigit(e) {
-    if (display.textContent == 0) { display.textContent = "" };
-    display.textContent += e.target.textContent
+    if (display.textContent == 0 || displayNeedsClearing) {
+        display.textContent = "";
+        displayNeedsClearing = false;
+    }
+    display.textContent += e.target.textContent;
 };
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
-operatorBtns.forEach(btn => {
-    const handleClick = () => {
+let displayNeedsClearing = false;
+let firstNumIsReady = false;
+function handleOperationBtnClick(e) {
+    // numbers on display are locked down, ready for calculations, unless cleared
+    displayNeedsClearing = true;
+
+    operator = e.target.textContent;
+
+    if (!firstNumIsReady) {
         num1 = display.textContent;
-        operator = btn.textContent;
-        console.log(num1, operator)
+        firstNumIsReady = true;
+        console.log("first number is not ready yet...")
+        console.log(num1, operator, num2)
+    } else {
+        num2 = display.textContent;
+        console.log("first number is ready");
 
-        digitBtns.forEach(btn => {
-            btn.removeEventListener("click", displayDigit);
-            btn.addEventListener("click", () => {
-                display.textContent = btn.textContent;
-            });
-        })
+        const calculationResult = operate(num1, num2, operator);
+        display.textContent = calculationResult;
+        num1 = calculationResult;
     };
-    btn.addEventListener("click", handleClick);
-})
+};
 
-// equalsBtn.addEventListener("click", () => {
-//     const lastEntryIsOperator = !isNumber(display.textContent.slice(-1));
-//     if (lastEntryIsOperator) return;
-
-//     const digitsAfterLastOperator = display.textContent.split(/\D+/ig).at(-1);
-//     num2 = digitsAfterLastOperator;
-
-//     const calculationResult = operate(num1, num2, operator);
-//     display.textContent = calculationResult;
-// });
+operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick))
 
 
 //TODO ? NEED TO FIND OUT HOW TO MAKE IT SO THAT AFTER USER CLICKS EQUALS, THE RESULT IS DISPLAYED, BUT AS SOON AS USER PRESSES ANOTHER NUMBER, IT RESTARTS - MAYBE NESTED EVENT LISTENERS? MAYBE ONCE:TRUE ON EVENT LISTENERS?
