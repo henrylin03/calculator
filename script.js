@@ -80,7 +80,7 @@ function handleOperationBtnClick(e) {
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 
 function handleEqualBtnClick() {
-    if (!num1) return;
+    if (!num1 || !secondNumberInputted) return;
     num2 = display.textContent;
     calculationResult = operate(num1, num2, operator);
     display.textContent = calculationResult;
