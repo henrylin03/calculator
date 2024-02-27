@@ -7,7 +7,9 @@ const equalsBtn = document.querySelector("#equals");
 let num1;
 let num2;
 let operator;
+let calculationResult;
 let displayNeedsClearing = false;
+let secondNumberInputted = false;
 
 function operate(num1, num2, operator) {
     num1 = +num1;
@@ -47,15 +49,17 @@ function displayDigit(e) {
 };
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
+function displayResult() {
+    if (calculationResult === undefined) return;
+};
 
-let secondNumberInputted = false;
 function handleOperationBtnClick(e) {
     console.log("second number inputted?", secondNumberInputted)
     if (!secondNumberInputted) {
         num1 = display.textContent;
     } else if (secondNumberInputted) {
         num2 = display.textContent;
-        const calculationResult = operate(num1, num2, operator);
+        calculationResult = operate(num1, num2, operator);
         display.textContent = calculationResult;
 
         // prep for chain calculations
@@ -74,30 +78,12 @@ function handleOperationBtnClick(e) {
     console.log("num2:", num2);
 
     displayNeedsClearing = true;
-
-
-
-    // // numbers on display are locked down, ready for calculations, unless cleared
-    // displayNeedsClearing = true;
-
-    // if (!firstNumIsReady) {
-    //     num1 = display.textContent;
-    //     firstNumIsReady = true;
-    //     operator = e.target.textContent;
-    //     return;
-    // };
-
-    // num2 = display.textContent;
-    // console.log("first number is ready");
-    // const calculationResult = operate(num1, num2, operator);
-    // display.textContent = calculationResult;
-
-    // // for any subsequent calculations
-    // // num1 = calculationResult;
-    // // operator = e.target.textContent;
 };
+operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 
-operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick))
+equalsBtn.addEventListener("click", displayResult)
+
+console.log(calculationResult)
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
 //!Bug: when users click one operator, and then want to change that to another one (eg clicked +, and then wants to actually multiply whatever number comes next - )
