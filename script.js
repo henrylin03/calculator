@@ -67,7 +67,7 @@ function handleOperationBtnClick(e) {
         num2 = display.value;
         calculationResult = operate(num1, num2, operator);
         display.value = calculationResult.toString().length > 6 ?
-            calculationResult.toFixed(5) : calculationResult;
+            calculationResult.toPrecision(5) : calculationResult;
         num1 = calculationResult;
     };
 
@@ -81,10 +81,8 @@ function handleEqualBtnClick() {
     if (num1 === null || !secondNumberInputted) return;
     num2 = display.value;
     calculationResult = operate(num1, num2, operator);
-    console.log(calculationResult);
-    console.log(calculationResult.toString().length);
     display.value = calculationResult.toString().length > 6 ?
-        calculationResult.toFixed(5) : calculationResult;
+        calculationResult.toPrecision(5) : calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
 
@@ -109,7 +107,4 @@ equalsBtn.addEventListener("click", handleEqualBtnClick);
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
 
-
-
-//TODO: round numbers (not sure how many dp), error for dividing by zero
 //!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
