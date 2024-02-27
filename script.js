@@ -44,7 +44,6 @@ function displayDigit(e) {
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 
 function handleOperationBtnClick(e) {
-    console.log("second number inputted?", secondNumberInputted)
     if (!secondNumberInputted) {
         num1 = display.textContent;
         digitBtns.forEach(
@@ -57,14 +56,10 @@ function handleOperationBtnClick(e) {
         display.textContent = calculationResult;
         displayNeedsClearing = true;
 
-        // prep for chain calculations
         num1 = calculationResult;
     };
 
     operator = e.target.textContent;
-    console.log("current operator:", operator);
-    console.log("num1:", num1)
-    console.log("num2:", num2);
 
     secondNumberInputted = false;
     displayNeedsClearing = true;
