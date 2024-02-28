@@ -40,6 +40,7 @@ body {
     border: none;
     background-color: #243441;
     color: #EFEDEE;
+    outline: none;
 }
 
 .buttons-container {
