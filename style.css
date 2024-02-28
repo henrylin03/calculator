@@ -48,9 +48,11 @@ button {
     font-size: 1rem;
     font-weight: bolder;
     background-color: #243441;
-    box-shadow: -0.1px -0.5px 3px 0.05px rgba(255, 255, 255, 0.7),
+    box-shadow: -1px -3px 8px -4px rgba(255, 255, 255, 0.5),
         1px 2px 8px 0.8px rgba(0, 0, 0, 0.9);
 }
+
+/* TODO: INSET SHADOW TOO!! */
 
 .digit,
 .decimal {
@@ -68,7 +70,7 @@ button {
     flex: 2 1 10px;
     background-color: #ED802E;
     color: #fff;
-    box-shadow: 1px 2px 2px 0.8px rgba(0, 0, 0, 0.5);
+    box-shadow: none;
 }
 
 /* TODO: MOVE CALCULATOR TOWARDS THE CENTER, VERTICALLY */
