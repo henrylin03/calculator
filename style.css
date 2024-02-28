@@ -29,7 +29,7 @@ body {
     border-radius: 2rem;
     padding: 2rem 1rem;
     background-color: #243441;
-    box-shadow: -2px 0 18px 0px rgba(255, 68, 0, 0.7);
+    box-shadow: -2px 0 18px -5px rgb(114, 87, 66);
 }
 
 .display {
