@@ -16,7 +16,7 @@ body {
     border-radius: 2rem;
     padding: 2rem 1rem;
     background-color: #243441;
-    box-shadow: -2px 0 18px -1px rgba(0, 0, 0, 0.8);
+    box-shadow: -2px 0 18px 0px rgba(255, 68, 0, 0.7);
 }
 
 .display {
