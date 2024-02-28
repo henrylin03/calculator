@@ -106,10 +106,10 @@ function displayDigitOrDecimalWithKeyboard(e) {
     const keyInput = e.key;
     const inputIsDigit = !isNaN(keyInput);
     if (keyInput == ".") addDecimal();
-    // if (inputIsDigit) displayDigit(keyInput);
+    if (inputIsDigit) displayDigit(keyInput);
 }; 3
 
-document.addEventListener("keyup", displayDigitOrDecimalWithKeyboard);
+document.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
