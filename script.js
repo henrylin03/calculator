@@ -101,6 +101,10 @@ function handleBackspace() {
     display.value = display.value.length > 1 ? display.value.slice(0, -1) : 0;
 };
 
+function mapKeysToDigitButtons(e) {
+    return;
+};
+
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
@@ -125,3 +129,5 @@ operatorBtns.forEach(operatorBtn =>
 );
 
 holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("btn-held")));
+
+//TODO: (1) ADD EVENT LISTENER TO DOCUMENT. ONKEYUP. USE E.CODE(?). 
