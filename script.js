@@ -102,9 +102,11 @@ function handleBackspace() {
 };
 
 function mapKeysToDigitButtons(e) {
+    alert(e.key);
     return;
 };
 
+document.addEventListener("keyup", mapKeysToDigitButtons);
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
