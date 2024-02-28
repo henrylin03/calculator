@@ -1,5 +1,5 @@
 const display = document.querySelector(".display");
-const allBtns = document.querySelectorAll("button");
+
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector(".clear");
@@ -7,6 +7,9 @@ const equalsBtn = document.querySelector(".equals");
 const negativeBtn = document.querySelector(".toggle-negative");
 const percentBtn = document.querySelector(".percent");
 const decimalBtn = document.querySelector(".decimal");
+
+const allBtns = document.querySelectorAll("button");
+const holdBtns = document.querySelectorAll(".hold");
 
 let num1;
 let num2;
@@ -117,3 +120,11 @@ allBtns.forEach(btn => {
     btn.addEventListener("mousedown", () => btn.classList.toggle("btn-clicked"));
     btn.addEventListener("mouseup", () => btn.classList.toggle("btn-clicked"));
 });
+
+// ? can this potentially be merged with the general event handler for operation buttons?
+operatorBtns.forEach(operatorBtn =>
+    operatorBtn.addEventListener("click", e => {
+        operatorBtns.forEach(e => e.classList.remove("btn-held"));
+        e.target.classList.add("btn-held");
+    })
+);
