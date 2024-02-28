@@ -7,17 +7,17 @@
 }
 
 body {
+    background-color: #FFB178;
     background-image: url("./assets/blob-haikei.svg");
-    aspect-ratio: 960/540;
-    width: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    background-attachment: fixed;
 }
 
 .calculator {
     max-width: 25rem;
-    margin: 5% auto 0 auto;
+    margin: 5% auto;
     border-radius: 2rem;
     padding: 2rem 1rem;
     background-color: #243441;
