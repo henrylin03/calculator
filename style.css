@@ -51,10 +51,9 @@ button {
     box-shadow:
         -1px -3px 8px -4px rgba(255, 255, 255, 0.4),
         inset 0 -0.1px 8px -4px rgba(255, 255, 255, 0.1),
-        0 2px 7px -2px rgba(0, 0, 0, 1);
+        0 2px 7px -2px rgba(0, 0, 0, 1),
+        inset 0 5px 7px -2px rgba(0, 0, 0, 0.1);
 }
-
-/* TODO: INSET SHADOW TOO!! */
 
 .digit,
 .decimal {
