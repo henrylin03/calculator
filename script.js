@@ -116,7 +116,6 @@ negativeBtn.addEventListener("click", () => display.value = display.value * -1);
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 decimalBtn.addEventListener("click", addDecimal);
 equalsBtn.addEventListener("click", handleEqualBtnClick);
-
 allBtns.forEach(btn => {
     btn.addEventListener("mousedown", () => btn.classList.toggle("btn-clicked"));
     btn.addEventListener("click", () => operatorBtns.forEach(b => b.classList.remove("btn-held")))
@@ -131,9 +130,4 @@ operatorBtns.forEach(operatorBtn =>
         e.target.classList.add("btn-held");
     })
 );
-
 holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("btn-held")));
-
-//TODO: (1) ADD EVENT LISTENER TO DOCUMENT. ONKEYUP. USE E.CODE(?). 
-
-//?HOW TO HAVE DISPLAYDIGIT TAKE IN THE DIGIT, AND NOT EVENT E PARAMETER??
