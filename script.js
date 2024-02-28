@@ -111,9 +111,10 @@ equalsBtn.addEventListener("click", handleEqualBtnClick);
 
 allBtns.forEach(btn => {
     btn.addEventListener("mousedown", () => btn.classList.toggle("btn-clicked"));
-    btn.addEventListener("mouseup", () => btn.classList.toggle("btn-clicked"));
     btn.addEventListener("click", () => operatorBtns.forEach(b => b.classList.remove("btn-held")))
 });
+document.body.addEventListener("mouseup", () =>
+    digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
 
 // ? can this potentially be merged with the general event handler for operation buttons?
 operatorBtns.forEach(operatorBtn =>
@@ -124,6 +125,3 @@ operatorBtns.forEach(operatorBtn =>
 );
 
 holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("btn-held")));
-
-//TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
-//!bug: if i mouse down on a digit, but mouse up somewhere else (i.e. hold a button and drag it) the brightness is stuck there
