@@ -48,8 +48,9 @@ function displayDigit(e) {
     if (display.value === "0" || displayNeedsClearing) {
         display.value = "";
         displayNeedsClearing = false;
-    } else if (display.value.length == MAXCHARSDISPLAYED) return;
+    } else if (display.value.length >= MAXCHARSDISPLAYED) return;
     display.value += e.target.textContent;
+    return;
 };
 
 function addDecimal() {
@@ -101,12 +102,14 @@ function handleBackspace() {
     display.value = display.value.length > 1 ? display.value.slice(0, -1) : 0;
 };
 
-function mapKeysToDigitButtons(e) {
-    alert(e.key);
-    return;
-};
+function displayDigitOrDecimalWithKeyboard(e) {
+    const keyInput = e.key;
+    const inputIsDigit = !isNaN(keyInput);
+    if (keyInput == ".") addDecimal();
+    // if (inputIsDigit) displayDigit(keyInput);
+}; 3
 
-document.addEventListener("keyup", mapKeysToDigitButtons);
+document.addEventListener("keyup", displayDigitOrDecimalWithKeyboard);
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
@@ -133,3 +136,6 @@ operatorBtns.forEach(operatorBtn =>
 holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("btn-held")));
 
 //TODO: (1) ADD EVENT LISTENER TO DOCUMENT. ONKEYUP. USE E.CODE(?). 
+
+//?HOW TO HAVE DISPLAYDIGIT TAKE IN THE DIGIT, AND NOT EVENT E PARAMETER??
+//!bug: can put in double decimals;
