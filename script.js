@@ -57,13 +57,13 @@ function addDecimal() {
     const currentNum = display.value;
     const currentNumHasDecimalAlready = currentNum.includes(".");
 
+    if (currentNum.slice(-1) == ".") return display.value = currentNum.slice(0, -1);
     if (currentNum == 0 || !currentNumHasDecimalAlready) {
         display.value = `${currentNum}.`;
         displayNeedsClearing = false;
         return;
     };
     if (displayNeedsClearing) return decimalBtn.disabled = true;
-    if (currentNum.slice(-1) == ".") return display.value = currentNum.slice(0, -1);
 };
 
 function handleOperationBtnClick(e) {
@@ -138,4 +138,3 @@ holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle
 //TODO: (1) ADD EVENT LISTENER TO DOCUMENT. ONKEYUP. USE E.CODE(?). 
 
 //?HOW TO HAVE DISPLAYDIGIT TAKE IN THE DIGIT, AND NOT EVENT E PARAMETER??
-//!bug: can put in double decimals;
