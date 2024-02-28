@@ -3,9 +3,9 @@ const display = document.querySelector(".display");
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector(".clear");
+const backspaceBtn = document.querySelector(".backspace");
 const equalsBtn = document.querySelector(".equals");
 const negativeBtn = document.querySelector(".toggle-negative");
-const percentBtn = document.querySelector(".percent");
 const decimalBtn = document.querySelector(".decimal");
 
 const allBtns = document.querySelectorAll("button");
@@ -17,7 +17,6 @@ let operator;
 let calculationResult = null;
 let displayNeedsClearing = false;
 let secondNumberInputted = false;
-let isPercent = false;
 
 function operate(num1, num2, operator) {
     num1 = +num1;
@@ -91,24 +90,19 @@ function handleEqualBtnClick() {
         calculationResult.toPrecision(5) : calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
-    isPercent = false;
-    percentBtn.classList.remove("btn-held");
 
     num1 = calculationResult;
 };
 
+function handleBackspace() {
+    if (display.value == 0 || displayNeedsClearing) return;
+    display.value = display.value.length > 1 ? display.value.slice(0, -1) : 0;
+}
+
 clearBtn.addEventListener("click", () => location.reload());
+backspaceBtn.addEventListener("click", handleBackspace);
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 negativeBtn.addEventListener("click", () => display.value = display.value * -1);
-percentBtn.addEventListener("click", () => {
-    if (isPercent) {
-        display.value = display.value * 100;
-        isPercent = false;
-    } else {
-        display.value = display.value / 100;
-        isPercent = true;
-    };
-});
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 decimalBtn.addEventListener("click", addDecimal);
 equalsBtn.addEventListener("click", handleEqualBtnClick);
@@ -134,5 +128,4 @@ holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle
 //!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
 //!bug: things are not rounding (low decimal places)
 // !bug: remove the zeroes after rounding (there was stackoverflow question about this already)
-
-//? can isPercent boolean just be a check of whether percent btn has the "btn-held" class??
+//!bug: if i mouse down on a digit, but mouse up somewhere else (i.e. hold a button and drag it) the brightness is stuck there
