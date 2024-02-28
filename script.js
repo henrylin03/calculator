@@ -3,6 +3,7 @@ const display = document.querySelector(".display");
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector(".clear");
+const backspaceBtn = document.querySelector(".backspace");
 const equalsBtn = document.querySelector(".equals");
 const negativeBtn = document.querySelector(".toggle-negative");
 const decimalBtn = document.querySelector(".decimal");
@@ -93,7 +94,13 @@ function handleEqualBtnClick() {
     num1 = calculationResult;
 };
 
+function handleBackspace() {
+    if (display.value == 0 || displayNeedsClearing) return;
+    display.value = display.value.length > 1 ? display.value.slice(0, -1) : 0;
+}
+
 clearBtn.addEventListener("click", () => location.reload());
+backspaceBtn.addEventListener("click", handleBackspace);
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 negativeBtn.addEventListener("click", () => display.value = display.value * -1);
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
@@ -121,3 +128,4 @@ holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle
 //!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
 //!bug: things are not rounding (low decimal places)
 // !bug: remove the zeroes after rounding (there was stackoverflow question about this already)
+//!bug: if i mouse down on a digit, but mouse up somewhere else (i.e. hold a button and drag it) the brightness is stuck there
