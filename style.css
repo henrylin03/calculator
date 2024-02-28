@@ -18,11 +18,11 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
+    justify-content: space-between;
 }
 
 .calculator {
+    margin: auto;
     max-width: 25rem;
     border-radius: 2rem;
     padding: 2rem 1rem;
@@ -108,6 +108,7 @@ footer {
     justify-content: center;
     gap: 10px;
     color: rgba(36, 52, 65, 0.8);
+    margin-bottom: 2%;
 }
 
 .github-icon {
