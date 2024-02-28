@@ -111,14 +111,10 @@ operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClic
 decimalBtn.addEventListener("click", addDecimal);
 equalsBtn.addEventListener("click", handleEqualBtnClick);
 
-//TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
-
-//!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
-//!bug: things are not rounding (low decimal places)
-
 allBtns.forEach(btn => {
     btn.addEventListener("mousedown", () => btn.classList.toggle("btn-clicked"));
     btn.addEventListener("mouseup", () => btn.classList.toggle("btn-clicked"));
+    btn.addEventListener("click", () => operatorBtns.forEach(b => b.classList.remove("btn-held")))
 });
 
 // ? can this potentially be merged with the general event handler for operation buttons?
@@ -128,3 +124,8 @@ operatorBtns.forEach(operatorBtn =>
         e.target.classList.add("btn-held");
     })
 );
+
+//TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
+
+//!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
+//!bug: things are not rounding (low decimal places)
