@@ -96,18 +96,11 @@ button {
 }
 
 .btn-clicked {
-    filter: brightness(110%);
+    filter: brightness(90%);
 }
 
 .btn-held {
-    filter: brightness(125%);
-}
-
-.btn-clicked,
-.btn-held {
-    box-shadow:
-        -1px -5px 10px -8px rgba(255, 255, 255, 0.5),
-        0 8px 8px -6px rgba(0, 0, 0, 0.6);
+    filter: brightness(80%);
 }
 
 /* footer */

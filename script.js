@@ -99,7 +99,7 @@ function handleEqualBtnClick() {
 function handleBackspace() {
     if (display.value == 0 || displayNeedsClearing) return;
     display.value = display.value.length > 1 ? display.value.slice(0, -1) : 0;
-}
+};
 
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
