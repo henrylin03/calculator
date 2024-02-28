@@ -1,4 +1,5 @@
 const display = document.querySelector(".display");
+const allBtns = document.querySelectorAll("button");
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector(".clear");
@@ -111,3 +112,8 @@ equalsBtn.addEventListener("click", handleEqualBtnClick);
 
 //!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
 //!bug: things are not rounding (low decimal places)
+
+allBtns.forEach(btn => {
+    btn.addEventListener("mousedown", () => btn.classList.toggle("btn-clicked"));
+    btn.addEventListener("mouseup", () => btn.classList.toggle("btn-clicked"));
+});

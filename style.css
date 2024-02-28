@@ -68,13 +68,6 @@ button {
         inset 0 5px 10px -2px rgba(0, 0, 0, 0.1);
 }
 
-button:active {
-    filter: brightness(110%);
-    box-shadow:
-        -1px -5px 10px -8px rgba(255, 255, 255, 0.5),
-        0 8px 8px -6px rgba(0, 0, 0, 0.6);
-}
-
 .clear,
 .toggle-negative,
 .percent,
@@ -87,6 +80,21 @@ button:active {
     color: white;
     background-color: #ED802E;
     box-shadow: 0 8px 8px -6px rgba(0, 0, 0, 0.6),
+}
+
+.btn-clicked {
+    filter: brightness(110%);
+}
+
+.btn-held {
+    filter: brightness(125%);
+}
+
+.btn-clicked,
+.btn-held {
+    box-shadow:
+        -1px -5px 10px -8px rgba(255, 255, 255, 0.5),
+        0 8px 8px -6px rgba(0, 0, 0, 0.6);
 }
 
 /* TODO: MOVE CALCULATOR TOWARDS THE CENTER, VERTICALLY */
