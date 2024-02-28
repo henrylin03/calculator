@@ -97,4 +97,17 @@ button {
         0 8px 8px -6px rgba(0, 0, 0, 0.6);
 }
 
+/* footer */
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: rgba(36, 52, 65, 0.8);
+}
+
+.github-icon {
+    width: 25px;
+}
+
 /* TODO: MOVE CALCULATOR TOWARDS THE CENTER, VERTICALLY */
