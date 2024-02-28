@@ -91,6 +91,8 @@ function handleEqualBtnClick() {
         calculationResult.toPrecision(5) : calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
+    isPercent = false;
+    percentBtn.classList.remove("btn-held");
 
     num1 = calculationResult;
 };
@@ -125,7 +127,12 @@ operatorBtns.forEach(operatorBtn =>
     })
 );
 
+holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("btn-held")));
+
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
 
 //!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
 //!bug: things are not rounding (low decimal places)
+// !bug: remove the zeroes after rounding (there was stackoverflow question about this already)
+
+//? can isPercent boolean just be a check of whether percent btn has the "btn-held" class??
