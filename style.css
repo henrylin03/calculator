@@ -31,15 +31,12 @@
 
 .row {
     display: flex;
+    width: 100%;
 }
 
 .buttons-container,
 .row {
     gap: 10px;
-}
-
-.final {
-    flex: 1;
 }
 
 /* buttons */
@@ -68,7 +65,7 @@ button {
 }
 
 .equals {
-    flex: 2;
+    flex: 2 1 10px;
     background-color: #ED802E;
     color: #fff;
     box-shadow: 1px 2px 2px 0.8px rgba(0, 0, 0, 0.5);
