@@ -5,7 +5,6 @@ const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector(".clear");
 const equalsBtn = document.querySelector(".equals");
 const negativeBtn = document.querySelector(".toggle-negative");
-const percentBtn = document.querySelector(".percent");
 const decimalBtn = document.querySelector(".decimal");
 
 const allBtns = document.querySelectorAll("button");
@@ -17,7 +16,6 @@ let operator;
 let calculationResult = null;
 let displayNeedsClearing = false;
 let secondNumberInputted = false;
-let isPercent = false;
 
 function operate(num1, num2, operator) {
     num1 = +num1;
@@ -91,8 +89,6 @@ function handleEqualBtnClick() {
         calculationResult.toPrecision(5) : calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
-    isPercent = false;
-    percentBtn.classList.remove("btn-held");
 
     num1 = calculationResult;
 };
@@ -100,15 +96,6 @@ function handleEqualBtnClick() {
 clearBtn.addEventListener("click", () => location.reload());
 digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
 negativeBtn.addEventListener("click", () => display.value = display.value * -1);
-percentBtn.addEventListener("click", () => {
-    if (isPercent) {
-        display.value = display.value * 100;
-        isPercent = false;
-    } else {
-        display.value = display.value / 100;
-        isPercent = true;
-    };
-});
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 decimalBtn.addEventListener("click", addDecimal);
 equalsBtn.addEventListener("click", handleEqualBtnClick);
@@ -134,5 +121,3 @@ holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle
 //!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
 //!bug: things are not rounding (low decimal places)
 // !bug: remove the zeroes after rounding (there was stackoverflow question about this already)
-
-//? can isPercent boolean just be a check of whether percent btn has the "btn-held" class??
