@@ -110,3 +110,4 @@ equalsBtn.addEventListener("click", handleEqualBtnClick);
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
 
 //!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
+//!bug: things are not rounding (low decimal places)

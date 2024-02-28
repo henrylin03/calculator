@@ -48,10 +48,10 @@ button {
     height: 70px;
     border: none;
     border-radius: 15px;
-    font-size: 1.6rem;
+    font-size: 1.2rem;
     font-family: "Roboto", sans-serif;
     background-color: #243441;
-    color: #808992;
+    color: #a8b0b9;
     box-shadow:
         -1px -3px 8px -4px rgba(255, 255, 255, 0.4),
         inset 0 -0.1px 8px -4px rgba(255, 255, 255, 0.1),
