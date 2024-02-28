@@ -1,5 +1,7 @@
 const display = document.querySelector(".display");
 
+const MAXCHARSDISPLAYED = 10;
+
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
 const clearBtn = document.querySelector(".clear");
@@ -46,7 +48,7 @@ function displayDigit(e) {
     if (display.value === "0" || displayNeedsClearing) {
         display.value = "";
         displayNeedsClearing = false;
-    } else if (display.value.length > 6) return;
+    } else if (display.value.length == MAXCHARSDISPLAYED) return;
     display.value += e.target.textContent;
 };
 
@@ -71,7 +73,7 @@ function handleOperationBtnClick(e) {
     } else {
         num2 = display.value;
         calculationResult = operate(num1, num2, operator);
-        display.value = calculationResult.toString().length > 6 ?
+        display.value = calculationResult.toString().length >= MAXCHARSDISPLAYED ?
             calculationResult.toPrecision(5) : calculationResult;
         num1 = calculationResult;
     };
@@ -86,7 +88,7 @@ function handleEqualBtnClick() {
     if (num1 === null || !secondNumberInputted) return;
     num2 = display.value;
     calculationResult = operate(num1, num2, operator);
-    display.value = calculationResult.toString().length > 6 ?
+    display.value = calculationResult.toString().length > MAXCHARSDISPLAYED ?
         calculationResult.toPrecision(5) : calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
@@ -124,8 +126,4 @@ operatorBtns.forEach(operatorBtn =>
 holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("btn-held")));
 
 //TODO: RESIZE NUMBERS TO MAKE SURE IT FITS WITHIN THE DISPLAY CONTAINER?
-
-//!bug: when an answer has been evaluated, and user start clicking numbers, then the user is starting from scratch again. there shouldn't be any memory of the old numbers/calcs.
-//!bug: things are not rounding (low decimal places)
-// !bug: remove the zeroes after rounding (there was stackoverflow question about this already)
 //!bug: if i mouse down on a digit, but mouse up somewhere else (i.e. hold a button and drag it) the brightness is stuck there
