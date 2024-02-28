@@ -1,6 +1,6 @@
 const display = document.querySelector(".display");
 
-const MAXCHARSDISPLAYED = 10;
+const MAXCHARSDISPLAYED = 9;
 
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
@@ -49,7 +49,7 @@ function displayDigit(e) {
         display.value = "";
         displayNeedsClearing = false;
     } else if (display.value.length >= MAXCHARSDISPLAYED) return;
-    display.value += e.target.textContent;
+    display.value += e.key || e.target.textContent;
     return;
 };
 
@@ -103,11 +103,10 @@ function handleBackspace() {
 };
 
 function displayDigitOrDecimalWithKeyboard(e) {
-    const keyInput = e.key;
-    const inputIsDigit = !isNaN(keyInput);
-    if (keyInput == ".") addDecimal();
-    if (inputIsDigit) displayDigit(keyInput);
-}; 3
+    const inputIsDigit = !isNaN(e.key);
+    if (e.key == ".") addDecimal();
+    if (inputIsDigit) displayDigit(e);
+};
 
 document.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
 clearBtn.addEventListener("click", () => location.reload());
