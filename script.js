@@ -48,7 +48,7 @@ function displayDigit(e) {
     if (display.value === "0" || displayNeedsClearing) {
         display.value = "";
         displayNeedsClearing = false;
-    } else if (display.value.length >= MAXCHARSDISPLAYED) return;
+    } else if (display.value.length >= MAX_CHARS_DISPLAYED) return;
     display.value += e.target.textContent;
     return;
 };
@@ -74,7 +74,7 @@ function handleOperationBtnClick(e) {
     } else {
         num2 = display.value;
         calculationResult = operate(num1, num2, operator);
-        display.value = calculationResult.toString().length >= MAXCHARSDISPLAYED ?
+        display.value = calculationResult.toString().length >= MAX_CHARS_DISPLAYED ?
             calculationResult.toPrecision(5) : calculationResult;
         num1 = calculationResult;
     };
@@ -89,7 +89,7 @@ function handleEqualBtnClick() {
     if (num1 === null || !secondNumberInputted) return;
     num2 = display.value;
     calculationResult = operate(num1, num2, operator);
-    display.value = calculationResult.toString().length > MAXCHARSDISPLAYED ?
+    display.value = calculationResult.toString().length > MAX_CHARS_DISPLAYED ?
         calculationResult.toPrecision(5) : calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
@@ -107,13 +107,16 @@ function inputFromKeyboard(e) {
     if (e.key == ".") {
         decimalBtn.dispatchEvent(new Event("mousedown"));
         decimalBtn.click();
-    } else if (inputIsDigit) {
+        return
+    };
+    if (inputIsDigit) {
         const equivalentBtn = document.querySelector(`.btn${e.key}`);
         equivalentBtn.dispatchEvent(new Event("mousedown"));
         equivalentBtn.click();
-    } else {
-        const KEY_TO_BTN = {}
-    };
+        return;
+    }
+    // const keyToBtnMap = {
+    // }
 };
 
 
