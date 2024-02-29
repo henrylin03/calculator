@@ -124,29 +124,21 @@ function inputFromKeyboard(e) {
 
     const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
     if (operatorKeys.has(input)) {
-        const operatorMap = { "*": "×", "x": "×", "/": "÷" }
+        const operatorMap = {
+            "+": "+",
+            "-": "−",
+            "*": "×",
+            "x": "×",
+            "/": "÷"
+        }
         equivalentBtn = Array.from(operatorBtns).find(
-            btn => btn.textContent == input || operatorMap[input])
+            btn => btn.textContent == operatorMap[input])
         equivalentBtn.click();
-    }
-    // if ((operatorKeys.has(e.key.lowerCase())))
+        return;
+    };
 
 
-    //todo: need to lowercase e.key when checking
 
-    // PSEUDOCODE: IF THE KEY IS AN OPERATOR, THEN FIND EQUIVALENT OPERATOR BTTN, AND DO THE ABOVE
-    // PSEUDOCODE: IF THE KEY IS NOT AN OPERATOR (ELSE), THEN FIND EQUIVALENT BTN AND DO THE ABOVE
-
-    // 
-
-    // equivalentBtn = Array.from(allBtns).find((btn) => btn.textContent == e.key);
-    // if (!equivalentBtn) {
-    //     console.log("btn not found");
-    //     return;
-    // }
-
-
-    // console.log(equivalentBtn);
 
     // const operatorMap = {
     //     "+": "+",
