@@ -140,14 +140,10 @@ function inputFromKeyboard(e) {
         backspaceBtn.click();
     };
 
-
-    // const operatorMap = {
-    //     "+": "+",
-    //     "−": "-",
-    //     "×": ["*", "x", "X"],
-    //     "÷": "/"
-    // };
-    // console.log(Object.entries(operatorMap));
+    if (input === "enter" || input === "=") {
+        equalsBtn.dispatchEvent(new Event("mousedown"));
+        equalsBtn.click();
+    }
 
     // const btnToKey = {
     //     clearBtn: ["A", "a", "C", "c", "Escape"],
@@ -167,12 +163,14 @@ document.body.addEventListener("keydown", inputFromKeyboard);
 document.body.addEventListener("mouseup", () => {
     digitBtns.forEach(btn => btn.classList.remove("btn-clicked"));
     backspaceBtn.classList.remove("btn-clicked");
-})
+    equalsBtn.classList.remove("btn-clicked");
+});
 document.body.addEventListener("keyup", () => {
     digitBtns.forEach(btn => btn.classList.remove("btn-clicked"));
     backspaceBtn.classList.remove("btn-clicked");
-}
-);
+    equalsBtn.classList.remove("btn-clicked");
+});
+//? potentially can have a class of buttons that "non-held" that would all just have its classes removed when key up or mouse up anywhere on the document!!
 
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
