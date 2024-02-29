@@ -1,6 +1,6 @@
 const display = document.querySelector(".display");
 
-const MAXCHARSDISPLAYED = 10;
+const MAX_CHARS_DISPLAYED = 9;
 
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
@@ -48,21 +48,22 @@ function displayDigit(e) {
     if (display.value === "0" || displayNeedsClearing) {
         display.value = "";
         displayNeedsClearing = false;
-    } else if (display.value.length == MAXCHARSDISPLAYED) return;
+    } else if (display.value.length >= MAX_CHARS_DISPLAYED) return;
     display.value += e.target.textContent;
+    return;
 };
 
 function addDecimal() {
     const currentNum = display.value;
     const currentNumHasDecimalAlready = currentNum.includes(".");
 
+    if (currentNum.slice(-1) == ".") return display.value = currentNum.slice(0, -1);
     if (currentNum == 0 || !currentNumHasDecimalAlready) {
         display.value = `${currentNum}.`;
         displayNeedsClearing = false;
         return;
     };
     if (displayNeedsClearing) return decimalBtn.disabled = true;
-    if (currentNum.slice(-1) == ".") return display.value = currentNum.slice(0, -1);
 };
 
 function handleOperationBtnClick(e) {
@@ -73,7 +74,7 @@ function handleOperationBtnClick(e) {
     } else {
         num2 = display.value;
         calculationResult = operate(num1, num2, operator);
-        display.value = calculationResult.toString().length >= MAXCHARSDISPLAYED ?
+        display.value = calculationResult.toString().length >= MAX_CHARS_DISPLAYED ?
             calculationResult.toPrecision(5) : calculationResult;
         num1 = calculationResult;
     };
@@ -88,7 +89,7 @@ function handleEqualBtnClick() {
     if (num1 === null || !secondNumberInputted) return;
     num2 = display.value;
     calculationResult = operate(num1, num2, operator);
-    display.value = calculationResult.toString().length > MAXCHARSDISPLAYED ?
+    display.value = calculationResult.toString().length > MAX_CHARS_DISPLAYED ?
         calculationResult.toPrecision(5) : calculationResult;
     displayNeedsClearing = true;
     secondNumberInputted = false;
@@ -101,20 +102,67 @@ function handleBackspace() {
     display.value = display.value.length > 1 ? display.value.slice(0, -1) : 0;
 };
 
+function inputFromKeyboard(e) {
+    e.preventDefault();
+
+    const input = e.key.toLowerCase();
+    const inputIsDigit = !isNaN(input);
+    const inputIsDecimal = input === ".";
+    const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
+    const operatorMap = {
+        "+": "+",
+        "-": "−",
+        "*": "×",
+        "x": "×",
+        "/": "÷"
+    };
+    const backspaceKeys = new Set(["backspace", "delete"]);
+    const clearKeys = new Set(["a", "c", "escape"]);
+    const equalsKeys = new Set(["enter", "="]);
+    const isInCategory = categorySet => categorySet.has(input);
+    const getEquivalentDigitBtn = () => document.querySelector(`.btn${input}`)
+
+    const equivalentBtn =
+        inputIsDigit ? getEquivalentDigitBtn()
+            : inputIsDecimal ? decimalBtn
+                : isInCategory(operatorKeys) ? Array.from(operatorBtns).find(btn => btn.textContent == operatorMap[input])
+                    : isInCategory(backspaceKeys) ? backspaceBtn
+                        : isInCategory(clearKeys) ? clearBtn
+                            : isInCategory(equalsKeys) ? equalsBtn : undefined;
+
+    if (!equivalentBtn) return;
+    if (!isInCategory(clearKeys)) equivalentBtn.dispatchEvent(new Event("mousedown"));
+    equivalentBtn.click();
+};
+
+
+document.body.addEventListener("keydown", inputFromKeyboard);
+document.body.addEventListener("mouseup", () => {
+    digitBtns.forEach(btn => btn.classList.remove("btn-clicked"));
+    backspaceBtn.classList.remove("btn-clicked");
+    equalsBtn.classList.remove("btn-clicked");
+});
+document.body.addEventListener("keyup", () => {
+    digitBtns.forEach(btn => btn.classList.remove("btn-clicked"));
+    backspaceBtn.classList.remove("btn-clicked");
+    equalsBtn.classList.remove("btn-clicked");
+});
+//? potentially can have a class of buttons that "non-held" that would all just have its classes removed when key up or mouse up anywhere on the document!!
+
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
-digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
+digitBtns.forEach(btn => {
+    btn.classList.add(`btn${btn.textContent}`);
+    btn.addEventListener("click", displayDigit);
+});
 negativeBtn.addEventListener("click", () => display.value = display.value * -1);
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 decimalBtn.addEventListener("click", addDecimal);
 equalsBtn.addEventListener("click", handleEqualBtnClick);
-
 allBtns.forEach(btn => {
     btn.addEventListener("mousedown", () => btn.classList.toggle("btn-clicked"));
     btn.addEventListener("click", () => operatorBtns.forEach(b => b.classList.remove("btn-held")))
 });
-document.body.addEventListener("mouseup", () =>
-    digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
 
 // ? can this potentially be merged with the general event handler for operation buttons?
 operatorBtns.forEach(operatorBtn =>
@@ -123,5 +171,4 @@ operatorBtns.forEach(operatorBtn =>
         e.target.classList.add("btn-held");
     })
 );
-
 holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("btn-held")));
