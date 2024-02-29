@@ -102,8 +102,9 @@ function handleBackspace() {
     display.value = display.value.length > 1 ? display.value.slice(0, -1) : 0;
 };
 
-function displayDigitOrDecimalWithKeyboard(e) {
+function inputFromKeyboard(e) {
     const inputIsDigit = !isNaN(e.key);
+
     if (e.key == ".") {
         decimalBtn.dispatchEvent(new Event("mousedown"));
         decimalBtn.click();
@@ -114,7 +115,7 @@ function displayDigitOrDecimalWithKeyboard(e) {
     };
 };
 
-document.body.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
+document.body.addEventListener("keydown", inputFromKeyboard);
 document.body.addEventListener("mouseup", () => {
     digitBtns.forEach(btn => btn.classList.remove("btn-clicked"));
     backspaceBtn.classList.remove("btn-clicked");
