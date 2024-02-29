@@ -103,21 +103,22 @@ function handleBackspace() {
 };
 
 function displayDigitOrDecimalWithKeyboard(e) {
-    if (e.key == ".") {
-        decimalBtn.dispatchEvent(new Event("mousedown"));
-        decimalBtn.dispatchEvent(new Event("mouseup"));
-        decimalBtn.dispatchEvent(new Event("click"));
-    };
-
-
+    if (e.key == ".") addDecimal();
     const inputIsDigit = !isNaN(e.key);
     if (inputIsDigit) displayDigit(e);
+
+    // function styleEquivalentBtnAsClicked() {
+    //     digitBtns.forEach(digitBtn => digitBtn.classList.add(digitBtn.textContent));
+    // }
 };
 
 document.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
-digitBtns.forEach(btn => btn.addEventListener("click", displayDigit));
+digitBtns.forEach(btn => {
+    btn.classList.add(btn.textContent);
+    btn.addEventListener("click", displayDigit);
+});
 negativeBtn.addEventListener("click", () => display.value = display.value * -1);
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 decimalBtn.addEventListener("click", addDecimal);
