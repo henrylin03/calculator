@@ -106,6 +106,8 @@ function inputFromKeyboard(e) {
     console.log(e.key);
     // console.log(Array.from(operatorBtns));
 
+
+    // todo: switch/case statement probably best here
     let equivalentBtn;
     const inputIsDigit = !isNaN(e.key);
     if (inputIsDigit) {
@@ -119,14 +121,26 @@ function inputFromKeyboard(e) {
         decimalBtn.click();
         return;
     };
-    equivalentBtn = Array.from(allBtns).find((btn) => btn.textContent == e.key);
-    if (!equivalentBtn) {
-        console.log("btn not found");
-        return;
-    }
+
+    const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
+    // if (e.key)
 
 
-    console.log(equivalentBtn);
+    //todo: need to lowercase e.key when checking
+
+    // PSEUDOCODE: IF THE KEY IS AN OPERATOR, THEN FIND EQUIVALENT OPERATOR BTTN, AND DO THE ABOVE
+    // PSEUDOCODE: IF THE KEY IS NOT AN OPERATOR (ELSE), THEN FIND EQUIVALENT BTN AND DO THE ABOVE
+
+    // 
+
+    // equivalentBtn = Array.from(allBtns).find((btn) => btn.textContent == e.key);
+    // if (!equivalentBtn) {
+    //     console.log("btn not found");
+    //     return;
+    // }
+
+
+    // console.log(equivalentBtn);
 
     // const operatorMap = {
     //     "+": "+",
@@ -136,12 +150,14 @@ function inputFromKeyboard(e) {
     // };
     // console.log(Object.entries(operatorMap));
 
-    // const btnToKey = {
-    //     clearBtn: ["A", "a", "C", "c", "Escape"],
-    //     backspaceBtn: ["Backspace", "Delete"],
-    //     equalsBtn: ["Enter", "="],
-    //     decimalBtn: ".",
-    // }
+    const btnToKey = {
+        clearBtn: ["A", "a", "C", "c", "Escape"],
+        backspaceBtn: ["Backspace", "Delete"],
+        equalsBtn: ["Enter", "="],
+        decimalBtn: ".",
+    }
+
+    // console.log(new Set(Object.values(btnToKey).flat()))
 };
 
 
