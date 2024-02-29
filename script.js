@@ -103,8 +103,6 @@ function handleBackspace() {
 };
 
 function inputFromKeyboard(e) {
-    console.log(e.key);
-    // console.log(Array.from(operatorBtns));
     const input = e.key.toLowerCase();
 
     // todo: switch/case statement probably best here
@@ -137,7 +135,10 @@ function inputFromKeyboard(e) {
         return;
     };
 
-
+    if (input === "backspace" || input === "delete") {
+        backspaceBtn.dispatchEvent(new Event("mousedown"));
+        backspaceBtn.click();
+    };
 
 
     // const operatorMap = {
@@ -167,8 +168,11 @@ document.body.addEventListener("mouseup", () => {
     digitBtns.forEach(btn => btn.classList.remove("btn-clicked"));
     backspaceBtn.classList.remove("btn-clicked");
 })
-document.body.addEventListener("keyup", () =>
-    digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
+document.body.addEventListener("keyup", () => {
+    digitBtns.forEach(btn => btn.classList.remove("btn-clicked"));
+    backspaceBtn.classList.remove("btn-clicked");
+}
+);
 
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
