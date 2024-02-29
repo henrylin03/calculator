@@ -103,8 +103,14 @@ function handleBackspace() {
 };
 
 function displayDigitOrDecimalWithKeyboard(e) {
+    if (e.key == ".") {
+        decimalBtn.dispatchEvent(new Event("mousedown"));
+        decimalBtn.dispatchEvent(new Event("mouseup"));
+        decimalBtn.dispatchEvent(new Event("click"));
+    };
+
+
     const inputIsDigit = !isNaN(e.key);
-    if (e.key == ".") addDecimal();
     if (inputIsDigit) displayDigit(e);
 };
 
