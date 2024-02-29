@@ -104,10 +104,13 @@ function handleBackspace() {
 
 function inputFromKeyboard(e) {
     const input = e.key.toLowerCase();
+    const inputIsDigit = !isNaN(input);
+    const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
+    const clearKeys = new Set(["a", "c", "escape"]);
 
     // todo: switch/case statement probably best here
     let equivalentBtn;
-    const inputIsDigit = !isNaN(input);
+
     if (inputIsDigit) {
         equivalentBtn = document.querySelector(`.btn${input}`);
         equivalentBtn.dispatchEvent(new Event("mousedown"));
@@ -119,8 +122,6 @@ function inputFromKeyboard(e) {
         decimalBtn.click();
         return;
     };
-
-    const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
     if (operatorKeys.has(input)) {
         const operatorMap = {
             "+": "+",
@@ -142,13 +143,8 @@ function inputFromKeyboard(e) {
         equalsBtn.dispatchEvent(new Event("mousedown"));
         equalsBtn.click();
     };
-
-    const clearKeys = new Set(["a", "c", "escape"]);
     if (clearKeys.has(input)) clearBtn.click();
 };
-
-
-// TODO: "C" FOR CLEAR, "A" FOR CLEAR, "BACKSPACE" FOR BACKSPACE, ---"SHIFT+" OR "SHIFT-" TO CHANGE POSTIVIE/NEGATIVE---, "/" FOR DIVIDE, "*" OR "X" FOR MULTIPLY, "-" FOR MINUS", "+" FOR PLUS, "ENTER" FOR EQUALS
 
 
 document.body.addEventListener("keydown", inputFromKeyboard);
