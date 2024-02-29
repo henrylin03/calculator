@@ -116,7 +116,7 @@ document.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
 digitBtns.forEach(btn => {
-    btn.classList.add(btn.textContent);
+    btn.classList.add(`btn${btn.textContent}`);
     btn.addEventListener("click", displayDigit);
 });
 negativeBtn.addEventListener("click", () => display.value = display.value * -1);
