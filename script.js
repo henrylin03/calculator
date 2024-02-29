@@ -106,44 +106,64 @@ function inputFromKeyboard(e) {
     const input = e.key.toLowerCase();
     const inputIsDigit = !isNaN(input);
     const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
+    const operatorMap = {
+        "+": "+",
+        "-": "−",
+        "*": "×",
+        "x": "×",
+        "/": "÷"
+    };
+    const backspaceKeys = new Set(["backspace", "delete"]);
     const clearKeys = new Set(["a", "c", "escape"]);
+    const equalsKeys = new Set(["enter", "="]);
+    const isInCategory = categorySet => categorySet.has(input);
+    const getEquivalentDigitBtn = () => document.querySelector(`.btn${input}`)
 
-    // todo: switch/case statement probably best here
-    let equivalentBtn;
+    const equivalentBtn =
+        inputIsDigit ? getEquivalentDigitBtn()
+            : isInCategory(operatorKeys) ? Array.from(operatorBtns).find(btn => btn.textContent == operatorMap[input])
+                : isInCategory(backspaceKeys) ? backspaceBtn
+                    : isInCategory(clearKeys) ? clearBtn
+                        : isInCategory(equalsKeys) ? equalsBtn
 
-    if (inputIsDigit) {
-        equivalentBtn = document.querySelector(`.btn${input}`);
-        equivalentBtn.dispatchEvent(new Event("mousedown"));
-        equivalentBtn.click();
-        return;
-    };
-    if (input == ".") {
-        decimalBtn.dispatchEvent(new Event("mousedown"));
-        decimalBtn.click();
-        return;
-    };
-    if (operatorKeys.has(input)) {
-        const operatorMap = {
-            "+": "+",
-            "-": "−",
-            "*": "×",
-            "x": "×",
-            "/": "÷"
-        };
-        equivalentBtn = Array.from(operatorBtns).find(
-            btn => btn.textContent == operatorMap[input]);
-        equivalentBtn.click();
-    };
+    equivalentBtn.click();
 
-    if (input === "backspace" || input === "delete") {
-        backspaceBtn.dispatchEvent(new Event("mousedown"));
-        backspaceBtn.click();
-    };
-    if (input === "enter" || input === "=") {
-        equalsBtn.dispatchEvent(new Event("mousedown"));
-        equalsBtn.click();
-    };
-    if (clearKeys.has(input)) clearBtn.click();
+
+    // let equivalentBtn;
+
+    // if (inputIsDigit) {
+    //     equivalentBtn = document.querySelector(`.btn${input}`);
+    //     equivalentBtn.dispatchEvent(new Event("mousedown"));
+    //     equivalentBtn.click();
+    //     return;
+    // };
+    // if (input == ".") {
+    //     decimalBtn.dispatchEvent(new Event("mousedown"));
+    //     decimalBtn.click();
+    //     return;
+    // };
+    // if (operatorKeys.has(input)) {
+    //     const operatorMap = {
+    //         "+": "+",
+    //         "-": "−",
+    //         "*": "×",
+    //         "x": "×",
+    //         "/": "÷"
+    //     };
+    //     equivalentBtn = Array.from(operatorBtns).find(
+    //         btn => btn.textContent == operatorMap[input]);
+    //     equivalentBtn.click();
+    // };
+
+    // if (input === "backspace" || input === "delete") {
+    //     backspaceBtn.dispatchEvent(new Event("mousedown"));
+    //     backspaceBtn.click();
+    // };
+    // if (input === "enter" || input === "=") {
+    //     equalsBtn.dispatchEvent(new Event("mousedown"));
+    //     equalsBtn.click();
+    // };
+    // if (clearKeys.has(input)) clearBtn.click();
 };
 
 
