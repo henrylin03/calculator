@@ -115,8 +115,10 @@ function displayDigitOrDecimalWithKeyboard(e) {
 };
 
 document.body.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
-document.body.addEventListener("mouseup", () =>
-    digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
+document.body.addEventListener("mouseup", () => {
+    digitBtns.forEach(btn => btn.classList.remove("btn-clicked"));
+    backspaceBtn.classList.remove("btn-clicked");
+})
 document.body.addEventListener("keyup", () =>
     digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
 
