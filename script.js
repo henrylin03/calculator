@@ -103,6 +103,8 @@ function handleBackspace() {
 };
 
 function inputFromKeyboard(e) {
+    console.log(e.key);
+
     const inputIsDigit = !isNaN(e.key);
     if (e.key == ".") {
         decimalBtn.dispatchEvent(new Event("mousedown"));
@@ -115,12 +117,18 @@ function inputFromKeyboard(e) {
         equivalentBtn.click();
         return;
     }
-    // const keyToBtnMap = {
-    // }
+
+    const btnToKeyMap = {
+        clearBtn: ["A", "a", "C", "c", "Escape"],
+        backspaceBtn: ["Backspace", "Delete"],
+        equalsBtn: ["Enter", "="],
+        decimalBtn: ".",
+
+    }
 };
 
 
-// TODO: "C" FOR CLEAR, "A" FOR CLEAR, "BACKSPACE" FOR BACKSPACE, "SHIFT+" OR "SHIFT-" TO CHANGE POSTIVIE/NEGATIVE, "/" FOR DIVIDE, "*" OR "X" FOR MULTIPLY, "-" FOR MINUS", "+" FOR PLUS, "ENTER" FOR EQUALS
+// TODO: "C" FOR CLEAR, "A" FOR CLEAR, "BACKSPACE" FOR BACKSPACE, ---"SHIFT+" OR "SHIFT-" TO CHANGE POSTIVIE/NEGATIVE---, "/" FOR DIVIDE, "*" OR "X" FOR MULTIPLY, "-" FOR MINUS", "+" FOR PLUS, "ENTER" FOR EQUALS
 
 
 document.body.addEventListener("keydown", inputFromKeyboard);
