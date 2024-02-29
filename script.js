@@ -103,17 +103,13 @@ function handleBackspace() {
 };
 
 function displayDigitOrDecimalWithKeyboard(e) {
+    const inputIsDigit = !isNaN(e.key);
     if (e.key == ".") {
         decimalBtn.dispatchEvent(new Event("mousedown"));
         addDecimal();
-        return;
+    } else if (inputIsDigit) {
+        displayDigit(e);
     };
-    const inputIsDigit = !isNaN(e.key);
-    if (inputIsDigit) displayDigit(e);
-
-    // function styleEquivalentBtnAsClicked() {
-    //     digitBtns.forEach(digitBtn => digitBtn.classList.add(digitBtn.textContent));
-    // }
 };
 
 document.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
