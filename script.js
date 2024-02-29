@@ -105,25 +105,31 @@ function handleBackspace() {
 function inputFromKeyboard(e) {
     console.log(e.key);
     // console.log(Array.from(operatorBtns));
-
+    const input = e.key.toLowerCase();
 
     // todo: switch/case statement probably best here
     let equivalentBtn;
-    const inputIsDigit = !isNaN(e.key);
+    const inputIsDigit = !isNaN(input);
     if (inputIsDigit) {
-        equivalentBtn = document.querySelector(`.btn${e.key}`);
+        equivalentBtn = document.querySelector(`.btn${input}`);
         equivalentBtn.dispatchEvent(new Event("mousedown"));
         equivalentBtn.click();
         return;
     };
-    if (e.key == ".") {
+    if (input == ".") {
         decimalBtn.dispatchEvent(new Event("mousedown"));
         decimalBtn.click();
         return;
     };
 
     const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
-    // if (e.key)
+    if (operatorKeys.has(input)) {
+        const operatorMap = { "*": "×", "x": "×", "/": "÷" }
+        equivalentBtn = Array.from(operatorBtns).find(
+            btn => btn.textContent == input || operatorMap[input])
+        equivalentBtn.click();
+    }
+    // if ((operatorKeys.has(e.key.lowerCase())))
 
 
     //todo: need to lowercase e.key when checking
@@ -150,12 +156,12 @@ function inputFromKeyboard(e) {
     // };
     // console.log(Object.entries(operatorMap));
 
-    const btnToKey = {
-        clearBtn: ["A", "a", "C", "c", "Escape"],
-        backspaceBtn: ["Backspace", "Delete"],
-        equalsBtn: ["Enter", "="],
-        decimalBtn: ".",
-    }
+    // const btnToKey = {
+    //     clearBtn: ["A", "a", "C", "c", "Escape"],
+    //     backspaceBtn: ["Backspace", "Delete"],
+    //     equalsBtn: ["Enter", "="],
+    //     decimalBtn: ".",
+    // }
 
     // console.log(new Set(Object.values(btnToKey).flat()))
 };
