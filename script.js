@@ -104,12 +104,12 @@ function handleBackspace() {
 
 function inputFromKeyboard(e) {
     console.log(e.key);
-    console.log(operatorBtns);
     // console.log(Array.from(operatorBtns));
 
+    let equivalentBtn;
     const inputIsDigit = !isNaN(e.key);
     if (inputIsDigit) {
-        const equivalentBtn = document.querySelector(`.btn${e.key}`);
+        equivalentBtn = document.querySelector(`.btn${e.key}`);
         equivalentBtn.dispatchEvent(new Event("mousedown"));
         equivalentBtn.click();
         return;
@@ -119,20 +119,29 @@ function inputFromKeyboard(e) {
         decimalBtn.click();
         return;
     };
-
-    const operatorMap = {
-        "+": "+",
-        "−": "-",
-        "×": ["*", "x", "X"],
-        "÷": "/"
-    };
-
-    const btnToKey = {
-        clearBtn: ["A", "a", "C", "c", "Escape"],
-        backspaceBtn: ["Backspace", "Delete"],
-        equalsBtn: ["Enter", "="],
-        decimalBtn: ".",
+    equivalentBtn = Array.from(allBtns).find((btn) => btn.textContent == e.key);
+    if (!equivalentBtn) {
+        console.log("btn not found");
+        return;
     }
+
+
+    console.log(equivalentBtn);
+
+    // const operatorMap = {
+    //     "+": "+",
+    //     "−": "-",
+    //     "×": ["*", "x", "X"],
+    //     "÷": "/"
+    // };
+    // console.log(Object.entries(operatorMap));
+
+    // const btnToKey = {
+    //     clearBtn: ["A", "a", "C", "c", "Escape"],
+    //     backspaceBtn: ["Backspace", "Delete"],
+    //     equalsBtn: ["Enter", "="],
+    //     decimalBtn: ".",
+    // }
 };
 
 
