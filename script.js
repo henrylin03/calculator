@@ -113,7 +113,10 @@ function displayDigitOrDecimalWithKeyboard(e) {
     };
 };
 
-document.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
+document.body.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
+document.body.addEventListener("mouseup", () =>
+    digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
+
 clearBtn.addEventListener("click", () => location.reload());
 backspaceBtn.addEventListener("click", handleBackspace);
 digitBtns.forEach(btn => {
@@ -128,8 +131,6 @@ allBtns.forEach(btn => {
     btn.addEventListener("mousedown", () => btn.classList.toggle("btn-clicked"));
     btn.addEventListener("click", () => operatorBtns.forEach(b => b.classList.remove("btn-held")))
 });
-document.body.addEventListener("mouseup", () =>
-    digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
 
 // ? can this potentially be merged with the general event handler for operation buttons?
 operatorBtns.forEach(operatorBtn =>
