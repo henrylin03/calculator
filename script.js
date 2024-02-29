@@ -103,6 +103,8 @@ function handleBackspace() {
 };
 
 function inputFromKeyboard(e) {
+    e.preventDefault();
+
     const input = e.key.toLowerCase();
     const inputIsDigit = !isNaN(input);
     const inputIsDecimal = input === ".";
@@ -129,8 +131,7 @@ function inputFromKeyboard(e) {
                             : isInCategory(equalsKeys) ? equalsBtn : undefined;
 
     if (!equivalentBtn) return;
-
-    equivalentBtn.dispatchEvent(new Event("mousedown"));
+    if (!isInCategory(clearKeys)) equivalentBtn.dispatchEvent(new Event("mousedown"));
     equivalentBtn.click();
 };
 
