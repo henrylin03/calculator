@@ -105,6 +105,7 @@ function handleBackspace() {
 function inputFromKeyboard(e) {
     const input = e.key.toLowerCase();
     const inputIsDigit = !isNaN(input);
+    const inputIsDecimal = input === ".";
     const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
     const operatorMap = {
         "+": "+",
@@ -121,49 +122,16 @@ function inputFromKeyboard(e) {
 
     const equivalentBtn =
         inputIsDigit ? getEquivalentDigitBtn()
-            : isInCategory(operatorKeys) ? Array.from(operatorBtns).find(btn => btn.textContent == operatorMap[input])
-                : isInCategory(backspaceKeys) ? backspaceBtn
-                    : isInCategory(clearKeys) ? clearBtn
-                        : isInCategory(equalsKeys) ? equalsBtn
+            : inputIsDecimal ? decimalBtn
+                : isInCategory(operatorKeys) ? Array.from(operatorBtns).find(btn => btn.textContent == operatorMap[input])
+                    : isInCategory(backspaceKeys) ? backspaceBtn
+                        : isInCategory(clearKeys) ? clearBtn
+                            : isInCategory(equalsKeys) ? equalsBtn : undefined;
 
+    if (!equivalentBtn) return;
+
+    equivalentBtn.dispatchEvent(new Event("mousedown"));
     equivalentBtn.click();
-
-
-    // let equivalentBtn;
-
-    // if (inputIsDigit) {
-    //     equivalentBtn = document.querySelector(`.btn${input}`);
-    //     equivalentBtn.dispatchEvent(new Event("mousedown"));
-    //     equivalentBtn.click();
-    //     return;
-    // };
-    // if (input == ".") {
-    //     decimalBtn.dispatchEvent(new Event("mousedown"));
-    //     decimalBtn.click();
-    //     return;
-    // };
-    // if (operatorKeys.has(input)) {
-    //     const operatorMap = {
-    //         "+": "+",
-    //         "-": "−",
-    //         "*": "×",
-    //         "x": "×",
-    //         "/": "÷"
-    //     };
-    //     equivalentBtn = Array.from(operatorBtns).find(
-    //         btn => btn.textContent == operatorMap[input]);
-    //     equivalentBtn.click();
-    // };
-
-    // if (input === "backspace" || input === "delete") {
-    //     backspaceBtn.dispatchEvent(new Event("mousedown"));
-    //     backspaceBtn.click();
-    // };
-    // if (input === "enter" || input === "=") {
-    //     equalsBtn.dispatchEvent(new Event("mousedown"));
-    //     equalsBtn.click();
-    // };
-    // if (clearKeys.has(input)) clearBtn.click();
 };
 
 
