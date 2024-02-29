@@ -128,31 +128,23 @@ function inputFromKeyboard(e) {
             "*": "×",
             "x": "×",
             "/": "÷"
-        }
+        };
         equivalentBtn = Array.from(operatorBtns).find(
-            btn => btn.textContent == operatorMap[input])
+            btn => btn.textContent == operatorMap[input]);
         equivalentBtn.click();
-        return;
     };
 
     if (input === "backspace" || input === "delete") {
         backspaceBtn.dispatchEvent(new Event("mousedown"));
         backspaceBtn.click();
     };
-
     if (input === "enter" || input === "=") {
         equalsBtn.dispatchEvent(new Event("mousedown"));
         equalsBtn.click();
-    }
+    };
 
-    // const btnToKey = {
-    //     clearBtn: ["A", "a", "C", "c", "Escape"],
-    //     backspaceBtn: ["Backspace", "Delete"],
-    //     equalsBtn: ["Enter", "="],
-    //     decimalBtn: ".",
-    // }
-
-    // console.log(new Set(Object.values(btnToKey).flat()))
+    const clearKeys = new Set(["a", "c", "escape"]);
+    if (clearKeys.has(input)) clearBtn.click();
 };
 
 
