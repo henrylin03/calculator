@@ -109,12 +109,15 @@ function displayDigitOrDecimalWithKeyboard(e) {
         decimalBtn.click();
     } else if (inputIsDigit) {
         const equivalentBtn = document.querySelector(`.btn${e.key}`);
+        equivalentBtn.dispatchEvent(new Event("mousedown"));
         equivalentBtn.click();
     };
 };
 
 document.body.addEventListener("keydown", displayDigitOrDecimalWithKeyboard);
 document.body.addEventListener("mouseup", () =>
+    digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
+document.body.addEventListener("keyup", () =>
     digitBtns.forEach(btn => btn.classList.remove("btn-clicked")));
 
 clearBtn.addEventListener("click", () => location.reload());
