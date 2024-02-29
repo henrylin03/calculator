@@ -104,26 +104,34 @@ function handleBackspace() {
 
 function inputFromKeyboard(e) {
     console.log(e.key);
+    console.log(operatorBtns);
+    // console.log(Array.from(operatorBtns));
 
     const inputIsDigit = !isNaN(e.key);
-    if (e.key == ".") {
-        decimalBtn.dispatchEvent(new Event("mousedown"));
-        decimalBtn.click();
-        return
-    };
     if (inputIsDigit) {
         const equivalentBtn = document.querySelector(`.btn${e.key}`);
         equivalentBtn.dispatchEvent(new Event("mousedown"));
         equivalentBtn.click();
         return;
-    }
+    };
+    if (e.key == ".") {
+        decimalBtn.dispatchEvent(new Event("mousedown"));
+        decimalBtn.click();
+        return;
+    };
 
-    const btnToKeyMap = {
+    const operatorMap = {
+        "+": "+",
+        "−": "-",
+        "×": ["*", "x", "X"],
+        "÷": "/"
+    };
+
+    const btnToKey = {
         clearBtn: ["A", "a", "C", "c", "Escape"],
         backspaceBtn: ["Backspace", "Delete"],
         equalsBtn: ["Enter", "="],
         decimalBtn: ".",
-
     }
 };
 
