@@ -103,7 +103,11 @@ function handleBackspace() {
 };
 
 function displayDigitOrDecimalWithKeyboard(e) {
-    if (e.key == ".") addDecimal();
+    if (e.key == ".") {
+        decimalBtn.dispatchEvent(new Event("mousedown"));
+        addDecimal();
+        return;
+    };
     const inputIsDigit = !isNaN(e.key);
     if (inputIsDigit) displayDigit(e);
 
