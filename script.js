@@ -49,7 +49,7 @@ function displayDigit(e) {
         display.value = "";
         displayNeedsClearing = false;
     } else if (display.value.length >= MAXCHARSDISPLAYED) return;
-    display.value += e.key || e.target.textContent;
+    display.value += e.target.textContent;
     return;
 };
 
@@ -106,9 +106,10 @@ function displayDigitOrDecimalWithKeyboard(e) {
     const inputIsDigit = !isNaN(e.key);
     if (e.key == ".") {
         decimalBtn.dispatchEvent(new Event("mousedown"));
-        addDecimal();
+        decimalBtn.click();
     } else if (inputIsDigit) {
-        displayDigit(e);
+        const equivalentBtn = document.querySelector(`.btn${e.key}`);
+        equivalentBtn.click();
     };
 };
 
