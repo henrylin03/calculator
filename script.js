@@ -1,6 +1,6 @@
 const display = document.querySelector(".display");
 
-const MAXCHARSDISPLAYED = 9;
+const MAX_CHARS_DISPLAYED = 9;
 
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
@@ -104,7 +104,6 @@ function handleBackspace() {
 
 function inputFromKeyboard(e) {
     const inputIsDigit = !isNaN(e.key);
-
     if (e.key == ".") {
         decimalBtn.dispatchEvent(new Event("mousedown"));
         decimalBtn.click();
@@ -112,8 +111,14 @@ function inputFromKeyboard(e) {
         const equivalentBtn = document.querySelector(`.btn${e.key}`);
         equivalentBtn.dispatchEvent(new Event("mousedown"));
         equivalentBtn.click();
+    } else {
+        const KEY_TO_BTN = {}
     };
 };
+
+
+// TODO: "C" FOR CLEAR, "A" FOR CLEAR, "BACKSPACE" FOR BACKSPACE, "SHIFT+" OR "SHIFT-" TO CHANGE POSTIVIE/NEGATIVE, "/" FOR DIVIDE, "*" OR "X" FOR MULTIPLY, "-" FOR MINUS", "+" FOR PLUS, "ENTER" FOR EQUALS
+
 
 document.body.addEventListener("keydown", inputFromKeyboard);
 document.body.addEventListener("mouseup", () => {
