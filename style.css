@@ -111,17 +111,17 @@ footer {
     justify-content: center;
     gap: 10px;
     color: rgba(36, 52, 65, 0.8);
-	margin-top: 0.4rem;
+    margin-top: 0.4rem;
     margin-bottom: 2%;
 }
 
 .github{
-	scale: 1;
-	transition: scale 0.2s ease-in-out; 
+    scale: 1;
+    transition: scale 0.2s ease-in-out; 
 }
 
 .github:hover { 
-	scale: 1.25; 
+    scale: 1.25; 
 }
 
 .github-icon {
