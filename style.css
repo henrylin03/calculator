@@ -117,3 +117,65 @@ footer {
 .github-icon {
     width: 20px;
 }
+
+/* toggle light mode */
+.light_mode{
+    color: #868f97;
+    background-color: #ebebeb;
+}
+.display_light_mode{
+    color: #243440;
+    background-color: #ebebeb;
+}
+.backspace_btn{
+    background-image: url('./assets/backspace-light.svg');
+}
+
+.dark_light_mode{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 1em;
+}
+.switch{
+    display: inline-block;
+    position: relative;
+    width: 4rem;
+    height: 2rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 2rem;
+}
+.switch::after{
+    content: '\1F319'; /* Unicode character for moon */
+    position: absolute;
+    top: 0.1rem;
+    left: 0.1em;
+    border-radius: 50%;
+    width:1.8rem;
+    height: 1.8rem;
+    background-color: #fff;
+    transition: all 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.switch:hover{
+    cursor: pointer;
+}
+input[type='checkbox']:checked + .switch::after{
+    translate: 2rem 0;
+    content: '\1F31E';
+}
+input[type='checkbox']{
+    display: none;
+}
+
+@media only screen and (max-width:768px){
+    .dark_light_mode{
+        display: flex;
+        justify-content: end;
+        margin:0 0 1em 0;
+        padding: 0.5em 0em;
+        translate: -0.5rem 0rem;
+    }
+}

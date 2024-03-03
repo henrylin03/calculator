@@ -172,3 +172,24 @@ operatorBtns.forEach(operatorBtn =>
     })
 );
 holdBtns.forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("btn-held")));
+
+// toggle dark & light mode
+const toggle_mode=document.querySelector('#toggle')
+const buttons=document.querySelectorAll('.row button')
+const calculator=document.querySelector('.calculator')
+
+toggle.addEventListener('change',()=>{
+    Array.from(buttons).forEach(button=>{
+        
+        display.classList.toggle('display_light_mode')
+        calculator.classList.toggle('light_mode')
+
+        if (button.classList.contains('backspace')) { 
+            button.classList.toggle('backspace_btn');
+        }
+
+        if (button.className!=='equals'){
+            button.classList.toggle('light_mode')
+        }
+    })
+})
