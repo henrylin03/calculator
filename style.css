@@ -110,10 +110,22 @@ footer {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    color: rgba(36, 52, 65, 0.8);
     margin-bottom: 2%;
+    color: rgba(36, 52, 65, 0.7);
+}
+
+.github-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .github-icon {
-    width: 20px;
+    fill: rgba(36, 52, 65, 0.7);
+    width: 24px;
+    transition: fill 0.4s ease-in-out;
+}
+
+.github-icon:hover {
+    fill: #18222b;
 }
