@@ -114,6 +114,17 @@ footer {
     margin-bottom: 2%;
 }
 
+.github-link{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .github-icon {
-    width: 20px;
+    width: 24px;
+    transition: fill 0.4s ease-in-out;
+}
+
+.github-icon:hover {
+    fill: black;
 }
