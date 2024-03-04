@@ -103,8 +103,6 @@ function handleBackspace() {
 };
 
 function inputFromKeyboard(e) {
-    e.preventDefault();
-
     const input = e.key.toLowerCase();
     const inputIsDigit = !isNaN(input);
     const inputIsDecimal = input === ".";
