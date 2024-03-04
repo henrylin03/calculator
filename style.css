@@ -132,21 +132,21 @@ footer {
 }
 
 /* toggle light mode */
-.light_mode {
+.light-mode {
     color: #868f97;
     background-color: #ebebeb;
 }
 
-.display_light_mode {
+.display-light-mode {
     color: #243440;
     background-color: #ebebeb;
 }
 
-.backspace_btn {
+.backspace-btn {
     background-image: url('./assets/backspace-light.svg');
 }
 
-.dark_light_mode {
+.dark-light-mode {
     width: 100%;
     display: flex;
     justify-content: end;
@@ -192,7 +192,7 @@ input[type='checkbox'] {
 }
 
 @media only screen and (max-width:768px) {
-    .dark_light_mode {
+    .dark-light-mode {
         display: flex;
         justify-content: end;
         margin: 0 0 1em 0;

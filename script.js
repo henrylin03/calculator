@@ -179,15 +179,15 @@ const calculator=document.querySelector('.calculator')
 toggle.addEventListener('change',()=>{
     Array.from(buttons).forEach(button=>{
         
-        display.classList.toggle('display_light_mode')
-        calculator.classList.toggle('light_mode')
+        display.classList.toggle('display-light-mode')
+        calculator.classList.toggle('light-mode')
 
         if (button.classList.contains('backspace')) { 
-            button.classList.toggle('backspace_btn');
+            button.classList.toggle('backspace-btn');
         }
 
         if (button.className!=='equals'){
-            button.classList.toggle('light_mode')
+            button.classList.toggle('light-mode')
         }
     })
 })
