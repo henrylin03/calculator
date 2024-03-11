@@ -1,6 +1,7 @@
 const display = document.querySelector(".display");
 
 const MAX_CHARS_DISPLAYED = 9;
+const LONG_PRESS_DELAY = 700; // Time to wait in ms before triggering long press action (for negative number toggle)
 
 const digitBtns = document.querySelectorAll(".digit");
 const operatorBtns = document.querySelectorAll(".operator");
@@ -19,6 +20,8 @@ let operator;
 let calculationResult = null;
 let displayNeedsClearing = false;
 let secondNumberInputted = false;
+let buttonTimer;
+let isLongPressFired = false;
 
 function operate(num1, num2, operator) {
     num1 = +num1;
@@ -31,6 +34,7 @@ function operate(num1, num2, operator) {
         if (num2 == "0") return "😵😵😵";
         return num1 / num2;
     };
+    const power = (num1, num2) => Math.pow(num1, num2);
 
     switch (operator) {
         case "+":
@@ -41,6 +45,8 @@ function operate(num1, num2, operator) {
             return multiply(num1, num2);
         case "÷":
             return divide(num1, num2);
+        case "xy":
+            return power(num1, num2);
     };
 };
 
@@ -67,6 +73,12 @@ function addDecimal() {
 };
 
 function handleOperationBtnClick(e) {
+    // Do not record as operator click if long press is detected.
+    if(isLongPressFired){
+        isLongPressFired = false;
+        return;
+    }
+
     if (!secondNumberInputted) {
         num1 = display.value;
         digitBtns.forEach(
@@ -106,13 +118,14 @@ function inputFromKeyboard(e) {
     const input = e.key.toLowerCase();
     const inputIsDigit = !isNaN(input);
     const inputIsDecimal = input === ".";
-    const operatorKeys = new Set(["+", "-", "*", "x", "/"]);
+    const operatorKeys = new Set(["+", "-", "*", "x", "/", "^"]);
     const operatorMap = {
         "+": "+",
         "-": "−",
         "*": "×",
         "x": "×",
-        "/": "÷"
+        "/": "÷",
+        "^": "xy"
     };
     const backspaceKeys = new Set(["backspace", "delete"]);
     const clearKeys = new Set(["a", "c", "escape"]);
@@ -133,6 +146,12 @@ function inputFromKeyboard(e) {
     equivalentBtn.click();
 };
 
+function toggleSign(){
+    buttonTimer = setTimeout(() => {
+        display.value = display.value * -1;
+        isLongPressFired = true;
+    }, LONG_PRESS_DELAY);
+}
 
 document.body.addEventListener("keydown", inputFromKeyboard);
 document.body.addEventListener("mouseup", () => {
@@ -153,7 +172,20 @@ digitBtns.forEach(btn => {
     btn.classList.add(`btn${btn.textContent}`);
     btn.addEventListener("click", displayDigit);
 });
-negativeBtn.addEventListener("click", () => display.value = display.value * -1);
+
+negativeBtn.addEventListener("mousedown", toggleSign);
+negativeBtn.addEventListener("touchstart", toggleSign);
+
+/* 
+   Clear timeout (buttonTimer) when the user releases the mouse button or hovers away from the minus button.
+   If it is done before the LONG_PRESS_DELAY, the long press function will not be executed.
+*/
+['mouseup', 'mouseleave', 'touchend', 'touchcancel'].forEach(eventType => {
+    negativeBtn.addEventListener(eventType, () => {
+        clearTimeout(buttonTimer);
+    });
+});
+
 operatorBtns.forEach(btn => btn.addEventListener("click", handleOperationBtnClick));
 decimalBtn.addEventListener("click", addDecimal);
 equalsBtn.addEventListener("click", handleEqualBtnClick);
